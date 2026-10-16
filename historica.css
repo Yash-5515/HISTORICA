@@ -4,7 +4,7 @@
   --gold:#c9a25a; --gold2:#e6c88a; --gold-dim:rgba(201,162,90,.28);
   --red:#8f1d1a;
   --line:rgba(201,162,90,.22);
-  --display:'Cinzel', serif; --serif:'Cormorant Garamond', serif; --ui:'Jost', sans-serif;
+  --display:'Cinzel', serif; --serif:'Times New Roman', Times, serif; --ui:'Jost', sans-serif;
   --dispWeight:500; --dispTrack:.06em; --dispCase:uppercase;
   --pad:clamp(20px,5vw,72px);
 }
