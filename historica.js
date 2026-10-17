@@ -68,7 +68,7 @@ const TL=[
     lb:'Reimagining',
     t:'HISTORICA — Reborn 10X Bigger',
     img:'assets/doorway.jpg',
-    d:'Brainchild of Mr. Anoop Srivastava and an initiative of Entertainment 7 Creative Ventures (P) Ltd., the museum expanded 10X into a multi-experiential universe featuring sets, 4D cinema, VFX, Thikri mirror inlay, and 42+ national icons.',
+    d:'Conceived by Mr. Anoop Srivastava and Entertainment 7 Creative Ventures, the museum expanded 10X into a multi-experiential universe featuring sets, 4D cinema, VFX, Thikri mirror inlay, and 42+ national icons.',
     highlight:'Multi-experiential history universe'
   },
   {
