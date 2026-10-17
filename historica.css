@@ -319,7 +319,18 @@ footer{padding:80px 0 40px;border-top:1px solid var(--line)}
 .done-mark{width:84px;height:84px;margin:10px auto 22px}
 .done-mark img{width:100%}
 
-.exp-featured { transform: scale(1.02); border: 1px solid var(--gold); box-shadow: 0 0 20px var(--gold-dim); z-index: 1; position: relative; }\n\n/* responsive */
+.exp-featured { transform: scale(1.02); border: 1px solid var(--gold); box-shadow: 0 0 20px var(--gold-dim); z-index: 1; position: relative; }\n\n/* show times grid */
+.show-times-grid{margin-top:40px;background:rgba(201,162,90,.05);border:1px solid var(--line);padding:30px;text-align:center}
+.st-head{font-family:var(--display);font-size:24px;color:var(--gold);margin-bottom:20px;text-transform:uppercase;letter-spacing:.1em}
+.st-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line}}
+.st-cell{background:var(--bg);padding:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;transition:.3s}
+.st-cell:hover{background:var(--bg3);color:var(--gold)}
+.st-cell span{font-family:var(--ui);font-size:11px;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.st-cell b{font-family:var(--display);font-size:20px;color:var(--ink)}
+.st-footer{margin-top:20px;font-family:var(--ui);font-size:13px;color:var(--ink3);letter-spacing:.1em}
+@media (max-width:640px){.st-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* responsive */
 @media (max-width:1060px){
   .nav-links{display:none}.burger{display:block}
   .nav-cta .btn-line{display:none}
