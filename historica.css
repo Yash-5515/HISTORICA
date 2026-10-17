@@ -4,7 +4,7 @@
   --gold:#c9a25a; --gold2:#e6c88a; --gold-dim:rgba(201,162,90,.28);
   --red:#8f1d1a;
   --line:rgba(201,162,90,.22);
-  --display:'Cinzel', serif; --serif:'Cormorant Garamond', serif; --ui:'Jost', sans-serif;
+  --display:'Cinzel', serif; --serif:'Times New Roman', Times, serif; --ui:'Jost', sans-serif;
   --dispWeight:500; --dispTrack:.06em; --dispCase:uppercase;
   --pad:clamp(16px, 4vw, 48px);
 }
@@ -14,8 +14,8 @@ html.light{
   --gold:#94702e; --gold2:#7a5a20; --gold-dim:rgba(148,112,46,.25);
   --line:rgba(120,90,40,.25);
 }
-html.f-editorial{--display:'Cormorant Garamond', serif; --serif:'Cormorant Garamond', serif; --dispWeight:500; --dispTrack:0; --dispCase:none}
-html.f-classic{--display:'Marcellus', serif; --serif:'EB Garamond', serif; --dispTrack:.04em}
+html.f-editorial{--display:'Cormorant Garamond', serif; --serif:'Times New Roman', Times, serif; --dispWeight:500; --dispTrack:0; --dispCase:none}
+html.f-classic{--display:'Marcellus', serif; --serif:'Times New Roman', Times, serif; --dispTrack:.04em}
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
