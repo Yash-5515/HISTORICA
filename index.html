@@ -182,59 +182,6 @@
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow rv">Now Showing - Ram Prakash Talkies</p><h2 class="h-display rv d1">Two historical 4D films</h2></div><p class="lede rv d2">Exclusive blockbuster films presented with sensory 4D effects, surround sound, and period theatre ambiance inside Nahargarh Fort.</p></div>
     <div class="films">
-      <article class="film rv">
-        <img src="assets/poster-nahargarh.jpg" alt="Mystery of Nahargarh poster" loading="lazy">
-        <div class="cap">
-          <div>
-            <h3>Mystery of Nahargarh</h3>
-            <p>The fort remembers - The curse &amp; the legend</p>
-            <div class="film-meta">
-              <span class="tech-badge">4D Motion &amp; VFX</span>
-              <span class="tech-badge">Runtime ~15 Min</span>
-            </div>
-            <div class="film-actions">
-              <button class="btn btn-line btn-sm" data-synopsis="nahargarh">Read Synopsis</button>
-              <button class="btn btn-gold btn-sm" data-book>Book Tickets</button>
-            </div>
-          </div>
-        </div>
-      </article>
-      <article class="film rv d1">
-        <img src="assets/poster-hadi-2.jpg" alt="Hadi Rani poster" loading="lazy">
-        <div class="cap">
-          <div>
-            <h3>Hadi Rani</h3>
-            <p>One queen - One vow - The ultimate sacrifice</p>
-            <div class="film-meta">
-              <span class="tech-badge">4D Audio &amp; Drama</span>
-              <span class="tech-badge">Runtime ~15 Min</span>
-            </div>
-            <div class="film-actions">
-              <button class="btn btn-line btn-sm" data-synopsis="hadi">Read Synopsis</button>
-              <button class="btn btn-gold btn-sm" data-book>Book Tickets</button>
-            </div>
-          </div>
-        </div>
-      </article>
-    </div>
-    <div class="show-times-grid">
-      <div class="st-head">Show Timings (25 Minutes per show)</div>
-      <div class="st-grid">
-        <div class="st-cell"><span>1st</span><b>10:15</b></div><div class="st-cell"><span>2nd</span><b>10:40</b></div><div class="st-cell"><span>3rd</span><b>11:05</b></div>
-        <div class="st-cell"><span>4th</span><b>11:30</b></div><div class="st-cell"><span>5th</span><b>11:55</b></div><div class="st-cell"><span>6th</span><b>12:20</b></div>
-        <div class="st-cell"><span>7th</span><b>12:45</b></div><div class="st-cell"><span>8th</span><b>1:10</b></div><div class="st-cell"><span>9th</span><b>1:35</b></div>
-        <div class="st-cell"><span>10th</span><b>2:00</b></div><div class="st-cell"><span>11th</span><b>2:25</b></div><div class="st-cell"><span>12th</span><b>2:50</b></div>
-        <div class="st-cell"><span>13th</span><b>3:15</b></div><div class="st-cell"><span>14th</span><b>3:40</b></div><div class="st-cell"><span>15th</span><b>4:05</b></div>
-        <div class="st-cell"><span>16th</span><b>4:30</b></div><div class="st-cell"><span>17th</span><b>4:55</b></div><div class="st-cell"><span>18th</span><b>5:20</b></div>
-        <div class="st-cell"><span>19th</span><b>5:45</b></div><div class="st-cell"><span>20th</span><b>6:10</b></div><div class="st-cell"><span>21st</span><b>6:35</b></div>
-      </div>
-      <div class="st-footer">Total 21 Shows Daily · Mystery of Nahargarh | Hadi Rani</div>
-    </div>
-    <div class="exp-badges" style="margin-top:24px">
-      <span class="tag-badge">Continuous Screenings Every 30 Minutes</span>
-      <span class="tag-badge">10:30 AM to 6:00 PM Daily</span>
-      <span class="tag-badge">Included in Full Entry Ticket</span>
-    </div>
   </div>
 </section>
 
@@ -369,73 +316,6 @@
   </div>
 </div>
 
-<!-- SYNOPSIS MODAL -->
-<div class="modal-overlay" id="synopsisModal" aria-hidden="true" role="dialog" aria-labelledby="synTitle">
-  <div class="modal-box">
-    <button class="modal-close" data-close-synopsis aria-label="Close modal">x</button>
-    <p class="eyebrow" id="synKicker">Ram Prakash Talkies - 4D Cinema</p>
-    <h3 class="h-display" id="synTitle">Mystery of Nahargarh</h3>
-    <div class="sub" id="synLore"></div>
-    <div class="exp-badges" style="margin-bottom:26px">
-      <span class="tag-badge" id="synDetails"></span>
-    </div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap">
-      <button class="btn btn-gold" data-book>Book Tickets <span class="arr"></span></button>
-      <button class="btn btn-line" data-close-synopsis>Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- GROUP ENQUIRY MODAL -->
-<div class="modal-overlay" id="groupModal" aria-hidden="true" role="dialog" aria-labelledby="grpTitle">
-  <div class="modal-box">
-    <button class="modal-close" data-close-grp aria-label="Close modal">x</button>
-    <p class="eyebrow">Events &amp; Delegations</p>
-    <h3 class="h-display" id="grpTitle">Plan a Group or School Visit</h3>
-    <p class="sub">HISTORICA provides tailored educational tours, priority 4D cinema scheduling, and special concessions for student groups, travel agencies, and corporate delegations.</p>
-    <form id="grpForm">
-      <div class="form-grid">
-        <div class="form-field">
-          <label for="grpType">Group Category</label>
-          <select id="grpType" required>
-            <option value="School / College Educational Tour">School / College Educational Tour</option>
-            <option value="Travel Agency / Tour Operator">Travel Agency / Tour Operator</option>
-            <option value="Corporate / Private Delegation">Corporate / Private Delegation</option>
-            <option value="Large Family Group (15+ guests)">Large Family Group (15+ guests)</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label for="grpOrg">Institution / Organization</label>
-          <input type="text" id="grpOrg" placeholder="e.g. Maharaja Sawai Man Singh Vidyalaya" required>
-        </div>
-        <div class="form-field">
-          <label for="grpName">Contact Person</label>
-          <input type="text" id="grpName" placeholder="Full name" required>
-        </div>
-        <div class="form-field">
-          <label for="grpPhone">Phone / WhatsApp</label>
-          <input type="tel" id="grpPhone" placeholder="+91 95095 3419" required>
-        </div>
-        <div class="form-field">
-          <label for="grpCount">Estimated Visitors</label>
-          <input type="number" id="grpCount" min="10" max="1000" placeholder="e.g. 45" required>
-        </div>
-        <div class="form-field">
-          <label for="grpDate">Preferred Date</label>
-          <input type="date" id="grpDate" required>
-        </div>
-        <div class="form-field full">
-          <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center">
-            Submit Enquiry on WhatsApp <span class="arr"></span>
-          </button>
-        </div>
-      </div>
-    </form>
-    <p class="form-note">Prefer to speak directly? Contact our group desk at <a href="tel:+919509503419" style="color:var(--gold)">+91 95095 3419</a> or email <a href="mailto:info@historicaworld.com" style="color:var(--gold)">info@historicaworld.com</a>.</p>
-  </div>
-</div>
-
-<div id="tweaks-root"></div>
 <script src="historica.js"></script>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
