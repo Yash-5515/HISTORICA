@@ -24,9 +24,13 @@
   <a href="#main" class="skip">Skip to content</a>
 
   <header class="nav" id="nav">
-    <a href="#top" class="brand" aria-label="HISTORICA home" style="padding-left: 20px;"><img src="assets/historica.png"
-        alt="" style="width: 60px; height: auto;"><span style="margin-left: 12px;"><b
-          style="font-size: 22px;">HISTORICA</b><small>Nahargarh - Jaipur</small></span></a>
+    <a href="#top" class="brand" aria-label="HISTORICA home">
+      <img src="assets/historica.png" alt="HISTORICA Logo">
+      <div class="brand-text">
+        <b>HISTORICA</b>
+        <small>Nahargarh - Jaipur</small>
+      </div>
+    </a>
     <nav aria-label="Primary">
       <ul class="nav-links">
         <li><a href="#experiences">Experiences</a></li>
@@ -307,42 +311,39 @@
       <div class="wrap">
         <div class="story-grid">
           <div class="story-sticky">
-            <div class="story-frame" style="position:relative">
-              <img class="on" src="assets/fort-day.jpg" alt="Nahargarh Fort on the Aravalli ridge">
-              <img src="assets/cricket.jpg" alt="Jaipur Wax Museum figures">
-              <img src="assets/doorway.jpg" alt="HISTORICA entrance">
-              <img src="assets/sheesh-mahal-wide.jpg" alt="Sheesh Mahal">
+            <div class="story-frame">
+              <img id="storyImg" src="assets/fort-day.jpg" alt="HISTORICA Journey" loading="lazy">
             </div>
             <div class="story-prog"><i id="storyProg"></i></div>
           </div>
           <div class="story-steps">
-            <div class="story-step story-intro on">
+            <div class="story-step active" data-img="assets/fort-day.jpg">
               <p class="eyebrow">Our Story</p>
               <h2 class="h-display">From Wax Museum to HISTORICA</h2>
               <p>The journey of a world-first museum reborn as an immersive stage for Rajasthan's greatest stories.</p>
             </div>
-            <div class="story-step">
+            <div class="story-step" data-img="assets/cricket.jpg">
               <p class="eyebrow">Chapter I - The Fort (1734)</p>
               <h3 class="h-display">Above the Pink City</h3>
               <p>Perched high on the Aravalli hills, 300-year-old Nahargarh Fort guarded Jaipur for centuries. Revered
                 as the retreat of Nine Queens, its stone ramparts harbor royal conspiracies and the immortal guardian
                 spirit of Nahar Singh Bhomia.</p>
             </div>
-            <div class="story-step">
+            <div class="story-step" data-img="assets/doorway.jpg">
               <p class="eyebrow">Chapter II - The Wax Museum (2016)</p>
               <h3 class="h-display">A Heritage First</h3>
               <p>In December 2016, Bollywood star Govinda inaugurated the Jaipur Wax Museum inside the fort walls - the
                 world's first wax museum at a heritage site, in collaboration with the Department of Archaeology &amp;
                 Museums, Government of Rajasthan.</p>
             </div>
-            <div class="story-step">
+            <div class="story-step" data-img="assets/sheesh-mahal-wide.jpg">
               <p class="eyebrow">Chapter III - The Transformation</p>
               <h3 class="h-display">Reborn 10X Bigger<br>HISTORICA</h3>
               <p>Conceived by Mr. Anoop Shrivastava, Founder & Director of Entertainment 7 Creative Ventures Pvt. Ltd.,
                 the museum evolved far beyond traditional wax exhibits - integrating 4D cinema, 2.5 million concave
                 mirrors, and pure gold dynasty artwork.</p>
             </div>
-            <div class="story-step">
+            <div class="story-step" data-img="assets/hero-bg.jpg">
               <p class="eyebrow">Chapter IV - Today</p>
               <h3 class="h-display">HISTORICA</h3>
               <p>Four magical worlds under one roof: Ram Prakash Talkies, Sheesh Mahal, Royal Darbar, and Hall of Icons.

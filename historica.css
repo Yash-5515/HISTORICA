@@ -63,8 +63,7 @@ body {
   font-family: var(--serif);
   font-size: 16px;
   line-height: 1.6;
-  overflow-x: hidden;
-  transition: background .5s, color .5s
+  transition: background .5s, color .5s;
 }
 
 img {
@@ -248,32 +247,41 @@ p {
   display: flex;
   align-items: center;
   gap: 12px;
-  text-decoration: none
+  text-decoration: none;
+  padding-left: 20px;
 }
 
 .brand img {
   width: 44px;
   height: auto;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .5))
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .5));
 }
 
-.brand b {
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-text b {
   font-family: 'Cinzel', serif;
   font-weight: 600;
   letter-spacing: .18em;
   font-size: 17px;
-  color: var(--gold2)
+  color: var(--gold2);
+  line-height: 1;
 }
 
-.brand small {
+.brand-text small {
   display: block;
   font-family: var(--ui);
   font-size: 9.5px;
   letter-spacing: .34em;
   color: var(--ink3);
   text-transform: uppercase;
-  margin-top: 2px
+  margin-top: 2px;
 }
+
 
 .nav-links {
   display: flex;
@@ -972,106 +980,94 @@ section {
 }
 
 /* story (scroll-driven) */
+/* story (scroll-driven) */
 .story {
-  background: var(--bg2)
+  background: var(--bg2);
+  position: relative;
+  overflow: visible !important;
+}
+
+.story .wrap {
+  overflow: visible !important;
 }
 
 .story-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(30px, 5vw, 90px)
+  gap: clamp(40px, 6vw, 90px);
+  align-items: start;
+  position: relative;
 }
 
 .story-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  top: 100px !important;
+  align-self: start !important;
+  height: fit-content !important;
+  z-index: 20 !important;
 }
 
 .story-frame {
   position: relative;
   width: 100%;
   aspect-ratio: 4/5;
-  max-height: 78vh;
+  max-height: calc(100vh - 160px);
   overflow: hidden;
-  border-radius: 999px 999px 0 0
+  border-radius: 999px 999px 0 0;
+  border: 1px solid var(--line);
 }
 
 .story-frame img {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transform: scale(1.08);
-  transition: opacity 1s, transform 1.6s
-}
-
-.story-frame img.on {
-  opacity: 1;
-  transform: scale(1)
-}
-
-.story-frame::after {
-  content: "";
-  position: absolute;
-  inset: 14px;
-  border: 1px solid rgba(230, 200, 138, .4);
-  border-radius: inherit
-}
-
-.story-prog {
-  position: absolute;
-  right: -28px;
-  top: 10%;
-  bottom: 10%;
-  width: 1px;
-  background: var(--line)
-}
-
-.story-prog i {
-  position: absolute;
-  left: -1px;
-  top: 0;
-  width: 3px;
-  background: var(--gold);
-  height: 0;
-  transition: height .2s
+  transition: opacity 0.4s ease, transform 0.6s ease;
 }
 
 .story-steps {
-  padding: 30vh 0
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40vh;
+  /* Gives long runway so Chapter IV stays pinned */
 }
 
 .story-step {
-  min-height: 72vh;
+  min-height: 90vh;
+  /* Long scroll distance for each chapter */
   display: flex;
   flex-direction: column;
   justify-content: center;
-  opacity: .25;
-  transition: opacity .6s
+  opacity: 0.35;
+  transition: opacity 0.4s ease;
 }
 
-.story-step.on {
-  opacity: 1
+.story-step.active {
+  opacity: 1;
 }
 
-.story-step .eyebrow {
-  margin-bottom: 18px
+object-fit: cover;
+transition: opacity 0.4s ease,
+transform 0.6s ease;
 }
 
-.story-step h3 {
-  font-size: clamp(32px, 3.6vw, 54px);
-  margin-bottom: 22px
+.story-steps {
+  display: flex;
+  flex-direction: column;
+  padding: 30vh 0;
 }
 
-.story-step p {
-  color: var(--ink2);
-  font-size: 21px;
-  max-width: 28em
+.story-step {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0.35;
+  transition: opacity 0.4s ease;
+}
+
+.story-step.active {
+  opacity: 1;
 }
 
 .story-intro h2 {
@@ -2165,12 +2161,16 @@ footer {
   }
 
   .story-sticky {
-    position: relative;
-    top: 0;
-    height: auto;
-    padding: 0 0 20px;
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 70px !important;
+    align-self: start !important;
+    height: fit-content !important;
+    z-index: 25 !important;
     background: var(--bg2);
+    padding: 8px 0 16px;
   }
+
 
   .story-frame {
     aspect-ratio: 16/10;
@@ -2314,9 +2314,15 @@ footer {
 }
 
 /* Universal box-sizing and overflow safety */
-*, *::before, *::after { box-sizing: border-box; }
-html, body {
-  overflow-x: hidden;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: clip;
   width: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -2331,6 +2337,7 @@ html, body {
   .nav {
     padding: 12px 16px;
   }
+
   .burger {
     display: flex !important;
     align-items: center;
@@ -2339,7 +2346,9 @@ html, body {
     height: 44px;
     z-index: 60;
   }
-  .nav-links, .nav-cta {
+
+  .nav-links,
+  .nav-cta {
     display: none !important;
   }
 
@@ -2348,23 +2357,28 @@ html, body {
     min-height: 85svh;
     padding-top: 64px;
   }
+
   .hero-cinematic .inner {
     padding: 0 16px 36px;
   }
+
   .hero-cinematic h1 {
     font-size: clamp(32px, 8vw, 42px) !important;
     line-height: 1.15;
   }
+
   .hero-cinematic .sub {
     font-size: 15px;
     margin: 12px auto 20px;
     max-width: 100%;
   }
+
   .hero-cinematic .ctas {
     flex-direction: column;
     width: 100%;
     gap: 12px;
   }
+
   .hero-cinematic .ctas .btn {
     width: 100%;
     justify-content: center;
@@ -2377,28 +2391,35 @@ html, body {
     gap: 20px !important;
     padding: 32px 0 !important;
   }
+
   .exp:nth-child(even) .exp-media {
     order: 0 !important;
   }
+
   .exp-media {
     aspect-ratio: 16/10;
     width: 100%;
     border-radius: 8px;
   }
+
   .exp h3 {
     font-size: 26px !important;
   }
+
   .exp p {
     font-size: 15px;
   }
+
   .exp-strip {
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 6px;
   }
+
   .films {
     grid-template-columns: 1fr !important;
     gap: 24px;
   }
+
   .film {
     aspect-ratio: 3/4;
     max-width: 380px;
@@ -2410,21 +2431,25 @@ html, body {
   .story-grid {
     grid-template-columns: 1fr !important;
   }
+
   .story-sticky {
     position: relative !important;
     top: 0 !important;
     height: auto !important;
     padding-bottom: 16px;
   }
+
   .story-frame {
     aspect-ratio: 16/10;
     max-height: 220px;
   }
+
   .story-step {
     min-height: auto !important;
     padding: 20px 0 !important;
     opacity: 1 !important;
   }
+
   .tl-track {
     display: flex !important;
     overflow-x: auto !important;
@@ -2432,10 +2457,12 @@ html, body {
     gap: 12px;
     padding-bottom: 12px;
   }
+
   .tl-track button {
     flex: 0 0 120px;
     scroll-snap-align: start;
   }
+
   .mapbox {
     grid-template-columns: 1fr !important;
     gap: 20px;
@@ -2449,13 +2476,16 @@ html, body {
     padding: 16px;
     border-bottom: 1px solid var(--line);
   }
+
   .ticket-row.head {
     display: none !important;
   }
-  .ticket-row > div + div {
+
+  .ticket-row>div+div {
     border-left: 0 !important;
     padding: 0 !important;
   }
+
   .info-list .info {
     grid-template-columns: 1fr !important;
     gap: 4px;
