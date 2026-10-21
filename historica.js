@@ -49,7 +49,12 @@
       current.classList.add('active');
       const targetSrc = current.getAttribute('data-img');
       if (targetSrc && !img.src.endsWith(targetSrc)) {
-        img.src = targetSrc;
+        // Smooth crossfade transition
+        img.classList.add('fade-out');
+        setTimeout(() => {
+          img.src = targetSrc;
+          img.classList.remove('fade-out');
+        }, 300); // Half of the CSS transition time for a centered fade
       }
     }
   }
