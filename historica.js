@@ -26,37 +26,6 @@
   $$('.reel-tabs button').forEach(b => b.onclick = () => reel(+b.dataset.i));
   reel(0);
 
-  /* scroll story */
-  const steps = $$('.story-step'), frames = $$('.story-frame img'), prog = $('#storyProg');
-  function storyTick() {
-    const steps = $$('.story-step');
-    const img = $('#storyImg') || $('.story-frame img');
-    if (!steps.length || !img) return;
-
-    const triggerY = window.innerHeight * 0.45;
-    let current = null;
-
-    steps.forEach(st => {
-      const rect = st.getBoundingClientRect();
-      if (rect.top <= triggerY && rect.bottom >= triggerY) {
-        current = st;
-      }
-    });
-
-    if (current) {
-      steps.forEach(s => s.classList.remove('active'));
-      current.classList.add('active');
-      const targetSrc = current.getAttribute('data-img');
-      if (targetSrc && !img.src.endsWith(targetSrc)) {
-        // Smooth crossfade transition
-        img.classList.add('fade-out');
-        setTimeout(() => {
-          img.src = targetSrc;
-          img.classList.remove('fade-out');
-        }, 300); // Half of the CSS transition time for a centered fade
-      }
-    }
-  }
 
   /* timeline — only facts from supplied material; others flagged */
   const TL = [
