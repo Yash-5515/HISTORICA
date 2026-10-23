@@ -88,11 +88,11 @@
   tl(0);
   resetTlTimer();
 
-  // Simplified pause logic: only pause on direct interaction elements
-  track.onmouseenter = () => clearTimeout(tlT);
-  track.onmouseleave = () => resetTlTimer();
-  panel.onmouseenter = () => clearTimeout(tlT);
-  panel.onmouseleave = () => resetTlTimer();
+  // Disabled pause logic to ensure continuous movement
+  // track.onmouseenter = () => clearTimeout(tlT);
+  // track.onmouseleave = () => resetTlTimer();
+  // panel.onmouseenter = () => clearTimeout(tlT);
+  // panel.onmouseleave = () => resetTlTimer();
 
   /* map */
   function pin(i) { $$('.pin').forEach(p => p.classList.toggle('on', +p.dataset.p === i)); $$('#legend li').forEach(l => l.classList.toggle('on', +l.dataset.p === i)) }
