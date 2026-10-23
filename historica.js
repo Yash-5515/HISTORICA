@@ -8,7 +8,6 @@
     nav.classList.toggle('solid', y > 40);
     mbook.classList.toggle('show', y > innerHeight * .8);
     revealTick();
-    storyTick();
   }
   addEventListener('scroll', onScroll, { passive: true });
   const burger = $('#burger');
