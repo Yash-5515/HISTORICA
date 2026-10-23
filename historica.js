@@ -88,16 +88,7 @@
   tl(0);
   resetTlTimer();
 
-  // Handle pause/resume on mouse interaction
-  const tlSection = $('#timeline');
-  if (tlSection) {
-    tlSection.onmouseenter = () => {
-      clearTimeout(tlT);
-    };
-    tlSection.onmouseleave = () => {
-      resetTlTimer();
-    };
-  }
+  // Simplified pause logic: only pause on direct interaction elements
   track.onmouseenter = () => clearTimeout(tlT);
   track.onmouseleave = () => resetTlTimer();
   panel.onmouseenter = () => clearTimeout(tlT);
