@@ -83,7 +83,7 @@
     clearTimeout(tlT);
     tlT = setTimeout(() => {
       tl(tlI + 1);
-    }, 5000);
+    }, 3000);
   }
   tl(0);
   resetTlTimer();
