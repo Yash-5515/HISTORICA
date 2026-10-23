@@ -68,8 +68,8 @@
     { yr: 'Today', lb: 'Now showing', t: 'Step into history', img: 'assets/sheesh-mahal.jpg', d: 'Ram Prakash Talkies, Sheesh Mahal, the Royal Darbar and the Hall of Icons — open to visitors at inaugural prices.', note: '' }
   ];
   const track = $('#tlTrack'), panel = $('#tlPanel'), fill = $('#tlFill');
-  TL.forEach((e, i) => { const b = document.createElement('button'); b.setAttribute('role', 'tab'); b.innerHTML = `<span class="yr">${e.yr}</span><span class="lb">${e.lb}</span>`; b.onclick = () => tl(i); track.appendChild(b) });
-  let tlI = 0;
+  TL.forEach((e, i) => { const b = document.createElement('button'); b.setAttribute('role', 'tab'); b.innerHTML = `<span class="yr">${e.yr}</span><span class="lb">${e.lb}</span>`; b.onclick = () => { tl(i); resetTlTimer(); }; track.appendChild(b) });
+  let tlI = 0, tlT;
   function tl(i) {
     tlI = (i + TL.length) % TL.length; const e = TL[tlI];
     $$('button', track).forEach((b, k) => { b.classList.toggle('on', k === tlI); b.setAttribute('aria-selected', k === tlI) });
@@ -77,9 +77,15 @@
     panel.innerHTML = `<div class="img"><img src="${e.img}" alt="${e.t}"></div>
   <div><div class="big">${String(tlI + 1).padStart(2, '0')}</div><p class="eyebrow" style="margin-top:14px">${e.lb}</p><h3 class="h-display">${e.t}</h3><p>${e.d} ${e.note ? `<span class="tbc">${e.note}</span>` : ''}</p>
   <div class="tl-nav"><button aria-label="Previous" data-d="-1">←</button><button aria-label="Next" data-d="1">→</button></div></div>`;
-    $$('.tl-nav button', panel).forEach(b => b.onclick = () => tl(tlI + +b.dataset.d));
+    $$('.tl-nav button', panel).forEach(b => b.onclick = () => { tl(tlI + +b.dataset.d); resetTlTimer(); });
   }
+  function resetTlTimer() { clearTimeout(tlT); tlT = setTimeout(() => tl(tlI + 1), 5000); }
   tl(0);
+  resetTlTimer();
+  track.onmouseenter = () => clearTimeout(tlT);
+  track.onmouseleave = () => resetTlTimer();
+  panel.onmouseenter = () => clearTimeout(tlT);
+  panel.onmouseleave = () => resetTlTimer();
 
   /* map */
   function pin(i) { $$('.pin').forEach(p => p.classList.toggle('on', +p.dataset.p === i)); $$('#legend li').forEach(l => l.classList.toggle('on', +l.dataset.p === i)) }
