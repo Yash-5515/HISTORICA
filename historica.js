@@ -79,9 +79,25 @@
   <div class="tl-nav"><button aria-label="Previous" data-d="-1">←</button><button aria-label="Next" data-d="1">→</button></div></div>`;
     $$('.tl-nav button', panel).forEach(b => b.onclick = () => { tl(tlI + +b.dataset.d); resetTlTimer(); });
   }
-  function resetTlTimer() { clearTimeout(tlT); tlT = setTimeout(() => tl(tlI + 1), 5000); }
+  function resetTlTimer() {
+    clearTimeout(tlT);
+    tlT = setTimeout(() => {
+      tl(tlI + 1);
+    }, 5000);
+  }
   tl(0);
   resetTlTimer();
+
+  // Handle pause/resume on mouse interaction
+  const tlSection = $('#timeline');
+  if (tlSection) {
+    tlSection.onmouseenter = () => {
+      clearTimeout(tlT);
+    };
+    tlSection.onmouseleave = () => {
+      resetTlTimer();
+    };
+  }
   track.onmouseenter = () => clearTimeout(tlT);
   track.onmouseleave = () => resetTlTimer();
   panel.onmouseenter = () => clearTimeout(tlT);
