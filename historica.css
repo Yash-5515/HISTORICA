@@ -2507,3 +2507,43 @@ body {
   mix-blend-mode: multiply;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
 }
+
+/* Hero Background Slider */
+.hero-bg-slider {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.slider-track {
+  display: flex;
+  width: 500%;
+  height: 100%;
+  animation: slide-pan 60s linear infinite;
+}
+
+.slider-track img {
+  width: 20%;
+  height: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+@keyframes slide-pan {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-80%, 0, 0); }
+}
+
+.hero-cinematic .veil {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.65), rgba(10, 10, 10, 0.88));
+}
+
+.hero-cinematic .inner {
+  z-index: 3;
+}
