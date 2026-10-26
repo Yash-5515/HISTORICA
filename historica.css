@@ -2499,9 +2499,9 @@ body {
 
 .rpt-logo {
   display: block;
-  height: 58px;
+  height: 80px;
   width: auto;
-  max-width: 240px;
+  max-width: 320px;
   object-fit: contain;
   margin: 0 0 16px 0;
   padding: 0;
