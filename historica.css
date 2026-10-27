@@ -2499,11 +2499,11 @@ body {
 
 .rpt-logo {
   display: block;
-  height: 80px;
+  height: 110px;
   width: auto;
-  max-width: 320px;
+  max-width: 420px;
   object-fit: contain;
-  margin: 0 0 16px 0;
+  margin: 0 0 6px 0;
   padding: 0;
   align-self: flex-start;
   margin-left: 0;
