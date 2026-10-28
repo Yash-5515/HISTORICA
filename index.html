@@ -413,22 +413,58 @@
               <p class="lede" style="font-size:17px;margin-bottom:20px">Hover or tap any zone to see exhibit details and
                 visitor highlights.</p>
               <ol class="map-legend" id="legend">
-                <li data-p="0"><i>I</i>Ram Prakash Talkies (Cinema)</li>
-                <li data-p="1"><i>II</i>Sheesh Mahal (Palace of Mirrors)</li>
-                <li data-p="2"><i>III</i>The Royal Darbar</li>
-                <li data-p="3"><i>IV</i>Hall of Icons &amp; Kids Zone</li>
-                <li data-p="4"><i>*</i>Main Entrance &amp; Tickets</li>
+                <li data-p="0"><i>I</i><span class="legend-title">Ram Prakash Talkies (Cinema)</span><span class="legend-arrow">&rarr;</span></li>
+                <li data-p="1"><i>II</i><span class="legend-title">Sheesh Mahal (Palace of Mirrors)</span><span class="legend-arrow">&rarr;</span></li>
+                <li data-p="2"><i>III</i><span class="legend-title">The Royal Darbar</span><span class="legend-arrow">&rarr;</span></li>
+                <li data-p="3"><i>IV</i><span class="legend-title">Hall of Icons &amp; Kids Zone</span><span class="legend-arrow">&rarr;</span></li>
+                <li data-p="4"><i>✦</i><span class="legend-title">Main Entrance &amp; Tickets</span><span class="legend-arrow">&rarr;</span></li>
               </ol>
               <div class="map-detail" id="mapDetail"></div>
             </div>
-            <div class="sitemap" id="sitemap"><img src="assets/fort-day.jpg" alt="Nahargarh Fort" loading="lazy">
-              <button class="pin on" style="left:34%;top:38%" data-p="0"><i>I</i><span>Ram Prakash
-                  Talkies</span></button>
-              <button class="pin" style="left:52%;top:30%" data-p="1"><i>II</i><span>Sheesh Mahal</span></button>
-              <button class="pin" style="left:66%;top:44%" data-p="2"><i>III</i>Royal Darbar</button>
-              <button class="pin" style="left:22%;top:58%" data-p="3"><i>IV</i><span>Hall of Icons</span></button>
-              <button class="pin" style="left:78%;top:64%" data-p="4"><i>*</i><span>Entrance</span></button>
-              <span class="map-note">Interactive Exhibit Guide - Nahargarh Fort</span>
+            <div class="sitemap" id="sitemap">
+              <img src="assets/fort-day.jpg" alt="Nahargarh Fort Exhibit Guide" loading="lazy">
+              <div class="sitemap-overlay"></div>
+              <button class="pin on" style="left:34%;top:38%" data-p="0" aria-label="Zone I - Ram Prakash Talkies">
+                <i>I</i>
+                <div class="pin-card">
+                  <span class="pin-title">Ram Prakash Talkies</span>
+                  <span class="pin-sub">Cinema Experience (1878-79)</span>
+                  <span class="pin-cta">Click to view section &darr;</span>
+                </div>
+              </button>
+              <button class="pin" style="left:52%;top:30%" data-p="1" aria-label="Zone II - Sheesh Mahal">
+                <i>II</i>
+                <div class="pin-card">
+                  <span class="pin-title">Sheesh Mahal</span>
+                  <span class="pin-sub">2.5 Million Thikri Mirrors</span>
+                  <span class="pin-cta">Click to view section &darr;</span>
+                </div>
+              </button>
+              <button class="pin" style="left:66%;top:44%" data-p="2" aria-label="Zone III - The Royal Darbar">
+                <i>III</i>
+                <div class="pin-card">
+                  <span class="pin-title">The Royal Darbar</span>
+                  <span class="pin-sub">18th-Century Royal Court</span>
+                  <span class="pin-cta">Click to view section &darr;</span>
+                </div>
+              </button>
+              <button class="pin" style="left:22%;top:58%" data-p="3" aria-label="Zone IV - Hall of Icons">
+                <i>IV</i>
+                <div class="pin-card">
+                  <span class="pin-title">Hall of Icons</span>
+                  <span class="pin-sub">42+ Statues &amp; Superhero Zone</span>
+                  <span class="pin-cta">Click to view section &darr;</span>
+                </div>
+              </button>
+              <button class="pin" style="left:78%;top:64%" data-p="4" aria-label="Zone ✦ - Main Entrance & Tickets">
+                <i>✦</i>
+                <div class="pin-card">
+                  <span class="pin-title">Main Entrance &amp; Tickets</span>
+                  <span class="pin-sub">Fort Gateway Reception</span>
+                  <span class="pin-cta">Click to view section &darr;</span>
+                </div>
+              </button>
+              <span class="map-note">Interactive Exhibit Guide &bull; Nahargarh Fort</span>
             </div>
           </div>
         </div>

@@ -1347,33 +1347,59 @@ html.light .showing {
   padding: 2px 7px
 }
 
-/* map */
+/* ==========================================================================
+   Interactive Site Map & Exhibit Guide
+   ========================================================================== */
 .mapbox {
   margin-top: clamp(50px, 7vw, 90px);
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
+  grid-template-columns: 1fr 1.4fr;
   gap: clamp(30px, 4vw, 64px);
-  align-items: center
+  align-items: center;
 }
 
 .sitemap {
   position: relative;
   aspect-ratio: 16/11;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  background: var(--bg2)
+  background: var(--bg2);
 }
 
 .sitemap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: .45;
-  filter: grayscale(.3)
+  opacity: .52;
+  filter: grayscale(.2);
+  transition: opacity .4s ease;
 }
 
 html.light .sitemap img {
-  opacity: .55
+  opacity: .6;
+}
+
+.sitemap-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, transparent 38%, rgba(10, 8, 6, 0.6) 100%),
+              linear-gradient(to top, rgba(10, 8, 6, 0.88) 0%, rgba(10, 8, 6, 0.2) 20%, transparent 40%);
+  z-index: 2;
+}
+
+@keyframes pin-ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 90, 0.7), 0 0 15px var(--gold);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(201, 162, 90, 0), 0 0 20px var(--gold);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 90, 0), 0 0 15px var(--gold);
+  }
 }
 
 .pin {
@@ -1381,87 +1407,278 @@ html.light .sitemap img {
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: 44px
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), z-index .3s;
+  background: transparent;
+  border: 0;
+  padding: 0;
 }
 
 .pin i {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: var(--gold);
-  color: #140f09;
+  color: #120e0a;
   display: grid;
   place-items: center;
   font-family: var(--display);
   font-style: normal;
+  font-weight: 600;
   font-size: 14px;
-  box-shadow: 0 0 0 6px var(--gold-dim);
-  transition: .3s;
-  flex: none
+  border: 2px solid #1a140d;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex: none;
 }
 
-.pin span {
+.pin:hover,
+.pin.on {
+  z-index: 30;
+}
+
+.pin:hover i,
+.pin.on i {
+  background: #f7d58b;
+  color: #0c0a08;
+  border-color: #f7d58b;
+  box-shadow: 0 0 15px var(--gold);
+  transform: scale(1.2);
+  animation: pin-ripple 1.8s infinite ease-out;
+}
+
+.pin .pin-card {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: rgba(13, 10, 8, 0.95);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  padding: 10px 14px;
+  min-width: 190px;
+  max-width: 250px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.75), 0 0 15px rgba(201, 162, 90, 0.2);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
+  text-align: left;
+  z-index: 40;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.pin .pin-card::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: var(--gold) transparent transparent transparent;
+}
+
+.pin:hover .pin-card,
+.pin.on .pin-card {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* For pin near top edge, position tooltip below */
+.pin[data-p="1"] .pin-card {
+  bottom: auto;
+  top: calc(100% + 12px);
+  transform: translateX(-50%) translateY(-6px);
+}
+.pin[data-p="1"] .pin-card::after {
+  top: auto;
+  bottom: 100%;
+  border-color: transparent transparent var(--gold) transparent;
+}
+.pin[data-p="1"]:hover .pin-card,
+.pin[data-p="1"].on .pin-card {
+  transform: translateX(-50%) translateY(0);
+}
+
+.pin-card .pin-title {
+  display: block;
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold2);
+  letter-spacing: .04em;
+  margin-bottom: 2px;
+}
+
+.pin-card .pin-sub {
+  display: block;
   font-family: var(--ui);
   font-size: 11px;
-  letter-spacing: .2em;
+  color: #c8bca7;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.pin-card .pin-cta {
+  display: block;
+  font-family: var(--ui);
+  font-size: 10px;
+  letter-spacing: .12em;
   text-transform: uppercase;
-  background: rgba(10, 8, 6, .85);
-  color: #f1e9da;
-  padding: 6px 10px;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: .3s
-}
-
-.pin:hover span,
-.pin.on span {
-  opacity: 1;
-  transform: none
-}
-
-.pin.on i {
-  box-shadow: 0 0 0 10px var(--gold-dim);
-  background: var(--gold2)
+  color: var(--gold);
+  font-weight: 500;
 }
 
 .map-note {
   position: absolute;
-  left: 12px;
-  bottom: 10px;
-  font-family: ui-monospace, Menlo, monospace;
+  left: 14px;
+  bottom: 12px;
+  font-family: var(--ui);
   font-size: 11px;
-  color: #d8ccb4;
-  background: rgba(0, 0, 0, .55);
-  padding: 4px 8px
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #f1e9da;
+  background: rgba(15, 12, 9, 0.94);
+  border: 1px solid rgba(201, 162, 90, 0.35);
+  border-radius: 4px;
+  padding: 6px 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  z-index: 5;
 }
 
 .map-legend {
   list-style: none;
-  counter-reset: a
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .map-legend li {
   display: flex;
+  align-items: center;
   gap: 16px;
-  padding: 14px 0;
+  padding: 12px 14px;
   border-bottom: 1px solid var(--line);
+  border-radius: 4px;
   cursor: pointer;
-  transition: color .3s;
-  min-height: 44px
+  transition: all .25s ease;
+  min-height: 48px;
+}
+
+.map-legend li:hover,
+.map-legend li.on {
+  background: rgba(201, 162, 90, 0.08);
+  border-color: rgba(201, 162, 90, 0.35);
+  color: var(--gold2);
+  padding-left: 18px;
 }
 
 .map-legend li i {
   font-style: normal;
   font-family: var(--display);
+  font-weight: 600;
   color: var(--gold);
-  width: 24px
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--gold-dim);
+  background: rgba(201, 162, 90, 0.1);
+  transition: all .25s ease;
+  flex: none;
 }
 
-.map-legend li.on,
-.map-legend li:hover {
-  color: var(--gold2)
+.map-legend li:hover i,
+.map-legend li.on i {
+  background: var(--gold);
+  color: #0c0a08;
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(201, 162, 90, 0.5);
+}
+
+.map-legend li .legend-title {
+  flex: 1;
+  font-size: 15px;
+}
+
+.map-legend li .legend-arrow {
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: all .25s ease;
+  color: var(--gold);
+  font-size: 13px;
+}
+
+.map-legend li:hover .legend-arrow,
+.map-legend li.on .legend-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.map-detail {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: rgba(21, 17, 13, 0.85);
+  border: 1px solid var(--gold-dim);
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  transition: all .3s ease;
+}
+
+.map-detail h5 {
+  font-family: var(--display);
+  font-size: 15px;
+  color: var(--gold2);
+  margin-bottom: 4px;
+}
+
+.map-detail p {
+  font-size: 13px;
+  color: var(--ink2);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.map-detail .map-detail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ui);
+  font-size: 11px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .2s;
+}
+
+.map-detail .map-detail-btn:hover {
+  color: var(--gold2);
+}
+
+@media (max-width: 860px) {
+  .pin i {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+  .pin .pin-card {
+    display: none;
+  }
+  .map-note {
+    font-size: 10px;
+    padding: 4px 8px;
+    bottom: 8px;
+    left: 8px;
+  }
 }
 
 /* groups */

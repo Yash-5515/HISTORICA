@@ -63,9 +63,60 @@
   // panel.onmouseleave = () => resetTlTimer();
 
   /* map */
-  function pin(i) { $$('.pin').forEach(p => p.classList.toggle('on', +p.dataset.p === i)); $$('#legend li').forEach(l => l.classList.toggle('on', +l.dataset.p === i)) }
-  $$('.pin,#legend li').forEach(el => { el.addEventListener('mouseenter', () => pin(+el.dataset.p)); el.addEventListener('click', () => pin(+el.dataset.p)) });
-  pin(4);
+  const ZONES = [
+    { p: 0, num: 'I', name: 'Ram Prakash Talkies', sub: 'Grand Cinematic Experience (1878-79)', desc: 'Screening "Mystery of Nahargarh" & "Hadi Rani" with physical sensory immersion, 4D effects and period theatre facade.', target: '#exp-talkies' },
+    { p: 1, num: 'II', name: 'Sheesh Mahal', sub: 'The Palace of Mirrors', desc: 'Over 2.5 million hand-cut Thikri mirrors and the world’s only designed glass floor reflecting endlessly into infinity.', target: '#exp-sheesh' },
+    { p: 2, num: 'III', name: 'The Royal Darbar', sub: 'Feel What It Was Like To Be Royalty', desc: '18th-century Rajputana courtroom with pure gold artwork, miniature paintings, thrones, and lifelike Jaipur royal figures.', target: '#exp-darbar' },
+    { p: 3, num: 'IV', name: 'Hall of Icons', sub: 'Bharat Ratnas & World Heroes', desc: '42+ lifelike statues honoring India’s legends, scientists, cricket icons, plus kids superhero realm.', target: '#exp-icons' },
+    { p: 4, num: '✦', name: 'Main Entrance & Tickets', sub: 'Nahargarh Fort Reception', desc: 'Ticket booths, visitor welcome reception, guided group assembly, and safety guidelines.', target: '#visit' }
+  ];
+
+  const mapDetail = $('#mapDetail');
+  function scrollToTarget(sel) {
+    const el = $(sel);
+    if (el) {
+      const navH = ($('#nav')?.offsetHeight || 70) + 16;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  }
+
+  function pin(i, scroll) {
+    const zone = ZONES[i] || ZONES[0];
+    $$('.pin').forEach(p => p.classList.toggle('on', +p.dataset.p === i));
+    $$('#legend li').forEach(l => l.classList.toggle('on', +l.dataset.p === i));
+    if (mapDetail) {
+      mapDetail.innerHTML = `<h5>${zone.num} &middot; ${zone.name}</h5><p style="color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">${zone.sub}</p><p>${zone.desc}</p><a href="${zone.target}" class="map-detail-btn" data-target="${zone.target}">Explore this area &rarr;</a>`;
+      const btn = $('.map-detail-btn', mapDetail);
+      if (btn) {
+        btn.onclick = e => {
+          e.preventDefault();
+          scrollToTarget(zone.target);
+        };
+      }
+    }
+    if (scroll) {
+      scrollToTarget(zone.target);
+    }
+  }
+
+  $$('.pin').forEach(el => {
+    el.addEventListener('mouseenter', () => pin(+el.dataset.p, false));
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      pin(+el.dataset.p, true);
+    });
+  });
+
+  $$('#legend li').forEach(el => {
+    el.addEventListener('mouseenter', () => pin(+el.dataset.p, false));
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      pin(+el.dataset.p, true);
+    });
+  });
+
+  pin(0, false);
 
   /* booking */
   const TICKETS = [
