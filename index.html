@@ -34,7 +34,7 @@
     <nav aria-label="Primary">
       <ul class="nav-links">
         <li><a href="#experiences">Experiences</a></li>
-        <li><a href="#visionary">Visionary</a></li>
+        <li><a href="#visionary-modal" class="open-visionary-modal">Visionary</a></li>
         <li><a href="#timeline">Timeline</a></li>
         <li><a href="#showing">Now Showing</a></li>
         <li><a href="#visit">Plan Your Visit</a></li>
@@ -48,35 +48,13 @@
     </div>
   </header>
   <div class="mobile-menu" id="mmenu" aria-hidden="true">
-    <a href="#experiences">Experiences</a><a href="#visionary">Visionary</a><a href="#timeline">Timeline</a><a
+    <a href="#experiences">Experiences</a><a href="#visionary-modal" class="open-visionary-modal">Visionary</a><a href="#timeline">Timeline</a><a
       href="#showing">Now Showing</a><a href="#visit">Plan Your Visit</a>
     <button class="btn btn-gold" data-book>Book Tickets <span class="arr"></span></button>
   </div>
 
   <main id="main">
     <!-- HERO A: cinematic -->
-    <section class="hero hero-cinematic" id="top" data-screen-label="01 Hero">
-      <div class="hero-bg-slider">
-        <div class="slider-track">
-          <img src="assets/fort-day.jpg" alt="Nahargarh Fort Day">
-          <img src="assets/sheesh-mahal-wide.jpg" alt="Sheesh Mahal">
-          <img src="assets/hero-bg.jpg" alt="Heritage Hall">
-          <img src="assets/fort-night.jpg" alt="Nahargarh Fort Night">
-          <img src="assets/fort-day.jpg" alt="Nahargarh Fort Day">
-        </div>
-      </div>
-      <div class="veil"></div>
-      <div class="inner">
-        <img class="crest" src="assets/historica.png" alt="HISTORICA Nahargarh crest">
-        <p class="eyebrow">Nahargarh Fort - Jaipur</p>
-        <h1 class="h-display" style="font-family: 'Cinzel', serif !important;">Step Into History</h1>
-        <p class="sub">Rajputana legend, mirrored palaces and the icons of a nation - brought to life high above Jaipur.
-        </p>
-        <div class="ctas"><a href="#experiences" class="btn btn-gold">Explore the Experiences <span
-              class="arr"></span></a><a href="#visit" class="btn btn-line">Plan Your Visit</a></div>
-      </div>
-      <span class="scroll-cue" aria-hidden="true"></span>
-    </section>
 
     <!-- HERO B: split editorial -->
     <section class="hero hero-split" data-screen-label="01 Hero">
@@ -176,6 +154,57 @@
             </div>
           </article>
 
+    <!-- NOW SHOWING -->
+    <section class="sec showing" id="showing" data-screen-label="06 Now Showing">
+      <div class="wrap">
+        <div class="sec-head">
+          <div>
+            <p class="eyebrow rv">Now Showing - Ram Prakash Talkies</p>
+            <h2 class="h-display rv d1">Two historical films</h2>
+          </div>
+          <p class="lede rv d2">Exclusive blockbuster films presented with sensory effects, surround sound, and
+            period theatre ambiance inside Nahargarh Fort.</p>
+        </div>
+        <div class="films">
+          <article class="film rv">
+            <img src="assets/poster-nahargarh.jpg" alt="Mystery of Nahargarh poster" loading="lazy">
+            <div class="cap">
+              <div>
+                <p>The fort remembers &mdash; The curse & the legend</p>
+                <div class="film-meta">
+                  <span class="tech-badge">Runtime ~25 Min</span>
+                </div>
+                <div class="film-actions">
+                  <button class="btn btn-gold btn-sm" data-book>Book Tickets</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="film rv d1">
+            <img src="assets/poster-hadi-2.jpg" alt="Hadi Rani poster" loading="lazy">
+            <div class="cap">
+              <div>
+                <p>One queen &mdash; One vow &mdash; The ultimate sacrifice</p>
+                <div class="film-meta">
+                  <span class="tech-badge">Runtime ~25 Min</span>
+                </div>
+                <div class="film-actions">
+                  <button class="btn btn-gold btn-sm" data-book>Book Tickets</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="exp-badges" style="margin-top:24px">
+          <span class="tag-badge">Continuous Screenings Every 30 Minutes</span>
+          <span class="tag-badge">10:30 AM to 6:00 PM Daily</span>
+          <span class="tag-badge">Included in Full Entry Ticket</span>
+        </div>
+      </div>
+    </section>
+
           <article class="exp" id="exp-sheesh">
             <div class="exp-media arch"><img src="assets/sheesh-mahal.jpg"
                 alt="The Sheesh Mahal, a hall of mirror mosaic and royal figures" loading="lazy"></div>
@@ -244,57 +273,6 @@
               </div>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- NOW SHOWING -->
-    <section class="sec showing" id="showing" data-screen-label="06 Now Showing">
-      <div class="wrap">
-        <div class="sec-head">
-          <div>
-            <p class="eyebrow rv">Now Showing - Ram Prakash Talkies</p>
-            <h2 class="h-display rv d1">Two historical films</h2>
-          </div>
-          <p class="lede rv d2">Exclusive blockbuster films presented with sensory effects, surround sound, and
-            period theatre ambiance inside Nahargarh Fort.</p>
-        </div>
-        <div class="films">
-          <article class="film rv">
-            <img src="assets/poster-nahargarh.jpg" alt="Mystery of Nahargarh poster" loading="lazy">
-            <div class="cap">
-              <div>
-                <p>The fort remembers &mdash; The curse & the legend</p>
-                <div class="film-meta">
-                  <span class="tech-badge">Runtime ~25 Min</span>
-                </div>
-                <div class="film-actions">
-                  <button class="btn btn-gold btn-sm" data-book>Book Tickets</button>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="film rv d1">
-            <img src="assets/poster-hadi-2.jpg" alt="Hadi Rani poster" loading="lazy">
-            <div class="cap">
-              <div>
-                <p>One queen &mdash; One vow &mdash; The ultimate sacrifice</p>
-                <div class="film-meta">
-                  <span class="tech-badge">Runtime ~25 Min</span>
-                </div>
-                <div class="film-actions">
-                  <button class="btn btn-gold btn-sm" data-book>Book Tickets</button>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <div class="exp-badges" style="margin-top:24px">
-          <span class="tag-badge">Continuous Screenings Every 30 Minutes</span>
-          <span class="tag-badge">10:30 AM to 6:00 PM Daily</span>
-          <span class="tag-badge">Included in Full Entry Ticket</span>
         </div>
       </div>
     </section>
@@ -503,7 +481,7 @@
         </div>
         <div>
           <h5>Explore</h5><a href="#exp-talkies">Ram Prakash Talkies</a><a href="#exp-sheesh">Sheesh Mahal</a><a
-            href="#exp-darbar">Royal Darbar</a><a href="#exp-icons">Hall of Icons</a>
+            href="#exp-darbar">Royal Darbar</a><a href="#exp-icons">Hall of Icons</a><a href="#visionary-modal" class="open-visionary-modal">The Visionary</a>
         </div>
         <div>
           <h5>Visit</h5><a href="#visit">Tickets &amp; hours</a><a href="#map">Site map</a><a href="#events">Groups
