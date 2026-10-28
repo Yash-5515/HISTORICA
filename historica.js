@@ -103,5 +103,42 @@
   next.onclick = () => { if (S.step === 4) { closeBk(); return } S.step++; render() };
   back.onclick = () => { S.step = Math.max(0, S.step - 1); render() };
 
+  /* visionary modal */
+  const vmodal = $('#visionary-modal');
+  function openVModal() {
+    if (!vmodal) return;
+    vmodal.classList.add('open');
+    vmodal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const closeBtn = $('.vmodal-close', vmodal);
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeVModal() {
+    if (!vmodal) return;
+    vmodal.classList.remove('open');
+    vmodal.setAttribute('aria-hidden', 'true');
+    if (!bk.classList.contains('open')) {
+      document.body.style.overflow = '';
+    }
+  }
+  document.addEventListener('click', e => {
+    if (e.target.closest('.open-visionary-modal, [href="#visionary-modal"], [data-modal="visionary"]')) {
+      e.preventDefault();
+      document.body.classList.remove('menu-open');
+      const burger = $('#burger');
+      if (burger) burger.setAttribute('aria-expanded', 'false');
+      openVModal();
+    }
+    if (e.target.closest('[data-vmodal-close]')) {
+      e.preventDefault();
+      closeVModal();
+    }
+  });
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && vmodal && vmodal.classList.contains('open')) {
+      closeVModal();
+    }
+  });
+
   onScroll();
 })();

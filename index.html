@@ -34,7 +34,7 @@
     <nav aria-label="Primary">
       <ul class="nav-links">
         <li><a href="#experiences">Experiences</a></li>
-        <li><a href="#visionary">Visionary</a></li>
+        <li><a href="#visionary-modal" class="open-visionary-modal">Visionary</a></li>
         <li><a href="#timeline">Timeline</a></li>
         <li><a href="#showing">Now Showing</a></li>
         <li><a href="#visit">Plan Your Visit</a></li>
@@ -48,7 +48,7 @@
     </div>
   </header>
   <div class="mobile-menu" id="mmenu" aria-hidden="true">
-    <a href="#experiences">Experiences</a><a href="#visionary">Visionary</a><a href="#timeline">Timeline</a><a
+    <a href="#experiences">Experiences</a><a href="#visionary-modal" class="open-visionary-modal">Visionary</a><a href="#timeline">Timeline</a><a
       href="#showing">Now Showing</a><a href="#visit">Plan Your Visit</a>
     <button class="btn btn-gold" data-book>Book Tickets <span class="arr"></span></button>
   </div>
@@ -299,48 +299,9 @@
       </div>
     </section>
 
-    <!-- VISIONARY -->
-    <section class="sec visionary" id="visionary" data-screen-label="04.5 Visionary">
-      <div class="wrap">
-        <div class="visionary-grid">
-          <div class="visionary-media">
-            <div class="visionary-frame">
-              <img src="assets/anoop.jpg" alt="Mr. Anoop Srivastava, Founder & Director of HISTORICA" loading="lazy">
-            </div>
-          </div>
-          <div class="visionary-content">
-            <p class="eyebrow rv">The Visionary Behind HISTORICA</p>
-            <h2 class="h-display rv d1">Anoop Srivastava</h2>
-            <p class="role rv d1">Founder & Director, Entertainment 7 Creative Ventures Pvt. Ltd.</p>
-            <div class="visionary-text rv d2">
-              <p>A pioneer in experiential storytelling, Mr. Anoop Srivastava transformed a vision of cultural
-                preservation into a living reality. From the inception of the Jaipur Wax Museum—the world's first of its
-                kind within a heritage site—he has pushed the boundaries of how we interact with history.</p>
-              <p>By merging authentic Rajasthani craftsmanship, such as the breathtaking 2.5 million mirrors of the
-                Sheesh Mahal, with cinematic technology, he has created an immersive universe where heritage is not
-                just seen, but felt.</p>
-              <blockquote class="visionary-quote">
-                "Our goal is to ensure that the echoes of our royal past are not lost to time, but are brought to life
-                with such vividness that future generations can feel the pulse of history."
-              </blockquote>
-              <div style="margin-top:32px">
-                <a href="https://www.facebook.com/share/19ewQUqAqT/?mibextid=wwXIfr" target="_blank" rel="noopener"
-                  class="btn btn-line btn-sm">
-                  Connect on Facebook <span class="arr"></span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- TIMELINE -->
     <section class="sec" id="timeline" data-screen-label="05 Timeline">
-
-      <!-- TIMELINE -->
-      <section class="sec" id="timeline" data-screen-label="05 Timeline">
-        <div class="wrap">
+      <div class="wrap">
           <div class="sec-head">
             <div>
               <p class="eyebrow rv">Interactive Timeline</p>
@@ -503,7 +464,7 @@
         </div>
         <div>
           <h5>Explore</h5><a href="#exp-talkies">Ram Prakash Talkies</a><a href="#exp-sheesh">Sheesh Mahal</a><a
-            href="#exp-darbar">Royal Darbar</a><a href="#exp-icons">Hall of Icons</a><a href="#visionary">The Visionary</a>
+            href="#exp-darbar">Royal Darbar</a><a href="#exp-icons">Hall of Icons</a><a href="#visionary-modal" class="open-visionary-modal">The Visionary</a>
         </div>
         <div>
           <h5>Visit</h5><a href="#visit">Tickets &amp; hours</a><a href="#map">Site map</a><a href="#events">Groups
@@ -521,6 +482,46 @@
 
   <button class="btn btn-gold mbook" id="mbook" data-book>Book Tickets <span class="arr"></span></button>
 
+
+  <!-- VISIONARY MODAL -->
+  <div class="vmodal" id="visionary-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vmodalTitle">
+    <div class="vmodal-scrim" data-vmodal-close></div>
+    <div class="vmodal-dialog">
+      <button class="vmodal-close" data-vmodal-close aria-label="Close Visionary details">&times;</button>
+      <div class="vmodal-content">
+        <div class="visionary-grid">
+          <div class="visionary-media">
+            <div class="visionary-frame">
+              <img src="assets/anoop.jpg" alt="Mr. Anoop Srivastava, Founder & Director of HISTORICA" loading="lazy">
+            </div>
+          </div>
+          <div class="visionary-content">
+            <p class="eyebrow">The Visionary Behind HISTORICA</p>
+            <h2 class="h-display" id="vmodalTitle">Anoop Srivastava</h2>
+            <p class="role">Founder &amp; Director, Entertainment 7 Creative Ventures Pvt. Ltd.</p>
+            <div class="visionary-text">
+              <p>A pioneer in experiential storytelling, Mr. Anoop Srivastava transformed a vision of cultural
+                preservation into a living reality. From the inception of the Jaipur Wax Museum-the world's first of its
+                kind within a heritage site-he has pushed the boundaries of how we interact with history.</p>
+              <p>By merging authentic Rajasthani craftsmanship, such as the breathtaking 2.5 million mirrors of the
+                Sheesh Mahal, with cinematic technology, he has created an immersive universe where heritage is not
+                just seen, but felt.</p>
+              <blockquote class="visionary-quote">
+                "Our goal is to ensure that the echoes of our royal past are not lost to time, but are brought to life
+                with such vividness that future generations can feel the pulse of history."
+              </blockquote>
+              <div style="margin-top:28px">
+                <a href="https://www.facebook.com/share/19ewQUqAqT/?mibextid=wwXIfr" target="_blank" rel="noopener"
+                  class="btn btn-line btn-sm">
+                  Connect on Facebook <span class="arr"></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- BOOKING -->
   <div class="bk" id="bk" aria-hidden="true">
     <div class="bk-scrim" data-close></div>
