@@ -2962,7 +2962,8 @@ body {
 .sheesh-landscape-banner {
   width: 100%;
   height: auto;
-  max-height: 480px; /* high-end cinematic height */
+  aspect-ratio: 1800 / 530;
+  max-height: 540px;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid rgba(212, 175, 55, 0.2);
