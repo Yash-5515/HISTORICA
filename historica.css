@@ -3021,3 +3021,37 @@ body {
     max-width: 320px;
   }
 }
+.footer-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.footer-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-e7-logo {
+  height: 52px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-divider {
+  width: 1px;
+  height: 38px;
+  background: rgba(212, 175, 55, 0.35); /* Subtle gold vertical divider */
+}
+
+@media (max-width: 600px) {
+  .footer-brand-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
