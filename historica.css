@@ -2729,14 +2729,13 @@ body {
 
 .rpt-logo {
   display: block;
-  height: 110px;
-  width: auto;
-  max-width: 420px;
+  height: auto;
+  max-height: 80px;
+  max-width: 320px;
   object-fit: contain;
-  margin: 0 0 6px 0;
+  margin: 0 0 16px 0;
   padding: 0;
   align-self: flex-start;
-  margin-left: 0;
   filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6)) brightness(1.05);
 }
 
