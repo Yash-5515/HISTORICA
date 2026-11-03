@@ -2947,3 +2947,45 @@ body {
     margin: 20px auto;
   }
 }
+/* Sheesh Mahal Landscape Layout */
+.exp.exp-sheesh-full {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  grid-template-columns: none !important;
+}
+
+.exp.exp-sheesh-full .sheesh-media-wrap {
+  width: 100%;
+}
+
+.sheesh-landscape-banner {
+  width: 100%;
+  height: auto;
+  max-height: 480px; /* high-end cinematic height */
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  display: block;
+  margin-bottom: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.sheesh-caption {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #d4af37; /* light heritage gold */
+  text-align: left;
+  margin: 0 0 24px 0;
+  opacity: 0.85;
+  font-family: inherit;
+}
+
+.exp.exp-sheesh-full .sheesh-content-wrap {
+  width: 100%;
+  max-width: 900px;
+}
+
+.exp.exp-sheesh-full .sheesh-content-wrap p {
+  max-width: 100%;
+}
