@@ -51,16 +51,15 @@
     clearTimeout(tlT);
     tlT = setTimeout(() => {
       tl(tlI + 1);
-    }, 1500);
+    }, 5000);
   }
   tl(0);
   resetTlTimer();
 
-  // Disabled pause logic to ensure continuous movement
-  // track.onmouseenter = () => clearTimeout(tlT);
-  // track.onmouseleave = () => resetTlTimer();
-  // panel.onmouseenter = () => clearTimeout(tlT);
-  // panel.onmouseleave = () => resetTlTimer();
+  track.onmouseenter = () => clearTimeout(tlT);
+  track.onmouseleave = () => resetTlTimer();
+  panel.onmouseenter = () => clearTimeout(tlT);
+  panel.onmouseleave = () => resetTlTimer();
 
   /* map */
   const ZONES = [

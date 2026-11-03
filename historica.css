@@ -46,6 +46,21 @@ html.f-classic {
   --dispTrack: .04em
 }
 
+/* Custom luxury scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 162, 90, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 162, 90, 0.6);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -172,8 +187,13 @@ p {
   padding: 17px 28px;
   min-height: 52px;
   text-decoration: none;
-  transition: all .3s;
-  border: 1px solid transparent
+  transition: all .35s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid transparent;
+  will-change: transform, box-shadow;
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-gold {
@@ -184,7 +204,9 @@ p {
 
 .btn-gold:hover {
   background: var(--gold2);
-  border-color: var(--gold2)
+  border-color: var(--gold2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(201, 162, 90, 0.35);
 }
 
 .btn-line {
@@ -194,7 +216,9 @@ p {
 
 .btn-line:hover {
   border-color: var(--gold);
-  color: var(--gold2)
+  color: var(--gold2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 162, 90, 0.18);
 }
 
 .btn .arr {
@@ -240,7 +264,8 @@ p {
   -webkit-backdrop-filter: blur(12px);
   border-bottom-color: var(--line);
   padding-top: 8px;
-  padding-bottom: 8px
+  padding-bottom: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .brand {
@@ -507,7 +532,8 @@ html[data-hero="reel"] .hero-reel {
   width: 1px;
   height: 46px;
   background: linear-gradient(var(--gold), transparent);
-  animation: cue 2.4s infinite
+  animation: cue 2.4s infinite;
+  z-index: 4;
 }
 
 @keyframes cue {
@@ -1170,7 +1196,16 @@ html.light .showing {
   overflow: hidden;
   aspect-ratio: 3/4;
   cursor: pointer;
-  background: #000
+  background: #000;
+  border: 1px solid rgba(201, 162, 90, 0.15);
+  border-radius: 6px;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.film:hover {
+  border-color: rgba(201, 162, 90, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 20px rgba(201, 162, 90, 0.2);
+  transform: translateY(-4px);
 }
 
 .film img {
@@ -3136,5 +3171,164 @@ body {
   }
   .quote-mark {
     display: none;
+  }
+}
+
+/* ==========================================================================
+   UI / UX Pro Max Polish: Animations, Smoothness & Badges
+   ========================================================================== */
+
+/* Badges & Tags */
+.exp-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  margin-top: 14px;
+}
+
+.tag-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ui);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(201, 162, 90, 0.08);
+  border: 1px solid rgba(201, 162, 90, 0.28);
+  color: var(--gold2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tag-badge:hover {
+  background: rgba(201, 162, 90, 0.16);
+  border-color: rgba(201, 162, 90, 0.5);
+  transform: translateY(-1px);
+}
+
+.tag-badge.red {
+  background: rgba(143, 29, 26, 0.15);
+  border-color: rgba(220, 53, 69, 0.4);
+  color: #ff9d9b;
+}
+
+.tag-badge.red:hover {
+  background: rgba(143, 29, 26, 0.25);
+  border-color: rgba(220, 53, 69, 0.6);
+}
+
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--ui);
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(201, 162, 90, 0.3);
+  color: var(--gold2);
+}
+
+/* Banner Image Hover Interactions */
+.sheesh-landscape-banner,
+.darbar-wide-banner,
+.icons-wide-banner {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+}
+
+.sheesh-landscape-banner:hover,
+.darbar-wide-banner:hover,
+.icons-wide-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7), 0 0 18px rgba(212, 175, 55, 0.25);
+}
+
+/* Timeline Content Smooth Transition */
+@keyframes tlContentFade {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tl-panel .img img,
+.tl-panel h3,
+.tl-panel p,
+.tl-panel .big,
+.tl-panel .eyebrow {
+  animation: tlContentFade 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Interactive Map Detail Fade */
+@keyframes mapDetailIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.map-detail {
+  animation: mapDetailIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hero Tag & Must-Visit Shimmer */
+@keyframes visitPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.25);
+    border-color: rgba(212, 175, 55, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.55);
+    border-color: #ffe082;
+  }
+}
+
+.must-visit-tag {
+  animation: visitPulse 3s infinite ease-in-out;
+}
+
+/* Modal and Option Smooth Transitions */
+.opt {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.opt:hover {
+  border-color: rgba(201, 162, 90, 0.5);
+  transform: translateY(-1px);
+}
+
+.opt.on {
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(201, 162, 90, 0.2);
+}
+
+/* Mobile Responsiveness for Header Logo */
+@media (max-width: 768px) {
+  .rpt-logo {
+    height: auto;
+    max-height: 85px;
+    max-width: 300px;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
