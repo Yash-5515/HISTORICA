@@ -2990,3 +2990,14 @@ body {
 .exp.exp-sheesh-full .sheesh-content-wrap p {
   max-width: 100%;
 }
+.sheesh-logo {
+  display: block;
+  height: auto;
+  max-height: 100px;
+  max-width: 380px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 0 20px 0;
+  align-self: flex-start;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
+}
