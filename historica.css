@@ -3087,13 +3087,15 @@ body {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  padding: 16px 28px;
-  background: rgba(10, 8, 6, 0.75);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 16px 24px;
+  max-width: 480px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(212, 175, 55, 0.2);
   border-radius: 8px;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   opacity: 0;
   animation: rise 1.2s .8s cubic-bezier(.2, .7, .2, 1) forwards;
 }
@@ -3110,11 +3112,11 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 4px;
+  gap: 0;
 }
 
 .quote-mark {
-  font-size: 2.2rem;
+  font-size: 1.2rem;
   color: #d4af37;
   line-height: 1;
   font-family: Georgia, serif;
@@ -3122,8 +3124,9 @@ body {
 
 .quote-pre {
   font-family: var(--display), sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   letter-spacing: 1.5px;
+  margin-bottom: 4px;
   color: #e6ca65;
   opacity: 0.9;
   text-transform: uppercase;
@@ -3131,9 +3134,10 @@ body {
 
 .quote-main {
   font-family: var(--display), sans-serif;
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-size: 1.05rem;
   font-weight: 800;
-  letter-spacing: 1.8px;
+  letter-spacing: 1.2px;
+  margin-bottom: 2px;
   color: #fdfbf7;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
   text-transform: uppercase;
@@ -3141,26 +3145,35 @@ body {
 
 .quote-sub {
   font-family: var(--display), sans-serif;
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
   color: #d4af37;
   text-transform: uppercase;
 }
 
-.must-visit-tag {
+.must-visit-btn {
   display: inline-block;
-  margin-top: 12px;
-  padding: 6px 20px;
-  border: 2px solid #d4af37;
-  border-radius: 6px;
-  color: #d4af37;
-  font-weight: 800;
-  font-size: 1.05rem;
-  letter-spacing: 2px;
-  background: rgba(0, 0, 0, 0.4);
-  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
   font-family: var(--ui), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 6px 16px;
+  border: 1.5px solid #d4af37;
+  border-radius: 4px;
+  color: #d4af37;
+  background: transparent;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.must-visit-btn:hover {
+  background: #d4af37;
+  color: #111;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
 }
 
 @media (max-width: 768px) {
@@ -3295,9 +3308,7 @@ body {
   }
 }
 
-.must-visit-tag {
-  animation: visitPulse 3s infinite ease-in-out;
-}
+
 
 /* Modal and Option Smooth Transitions */
 .opt {
