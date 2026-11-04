@@ -442,8 +442,12 @@ html[data-hero="reel"] .hero-reel {
   align-items: flex-end;
   justify-content: center;
   text-align: center;
-  background: url('assets/12.jpg') center center / cover no-repeat;
+  background-image: url('assets/13.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
   position: relative;
+  box-shadow: none;
 }
 
 .hero-cinematic .bg {
@@ -459,7 +463,9 @@ html[data-hero="reel"] .hero-reel {
 .hero-cinematic .veil {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 35%, rgba(12, 10, 8, .15), rgba(12, 10, 8, .7) 70%), linear-gradient(to bottom, rgba(12, 10, 8, .6), transparent 30%, rgba(12, 10, 8, .55) 60%, var(--bg))
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: none;
 }
 
 .hero-cinematic .inner {
@@ -2793,8 +2799,8 @@ body {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: radial-gradient(ellipse at 50% 40%, rgba(12, 10, 8, 0.25), rgba(12, 10, 8, 0.75) 75%),
-              linear-gradient(to bottom, rgba(12, 10, 8, 0.6) 0%, rgba(12, 10, 8, 0.3) 35%, rgba(12, 10, 8, 0.7) 70%, var(--bg) 100%);
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: none;
 }
 
 .hero-cinematic .inner {
