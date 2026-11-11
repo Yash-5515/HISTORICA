@@ -3925,3 +3925,287 @@ html.lenis body {
   transition-delay: 0.45s;
 }
 
+/* ==========================================================================
+   Mobile Audit & Responsive Polish (max-width: 768px & 480px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  /* 1. Wide Banners & Logos: Preserve Natural Aspect Ratios */
+  .darbar-wide-banner,
+  .hall-icons-banner,
+  .icons-wide-banner,
+  .sheesh-landscape-banner {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hall-icons-banner,
+  .icons-wide-banner,
+  .sheesh-landscape-banner {
+    aspect-ratio: 21 / 9;
+  }
+
+  .royal-darbar-logo,
+  .hall-icons-logo,
+  .sheesh-main-logo,
+  .sheesh-logo,
+  .rpt-logo,
+  .footer-logo,
+  .footer-e7-logo,
+  .foot .footer-logo,
+  .foot .footer-e7-logo {
+    height: auto;
+    width: auto;
+    max-width: 85%;
+    max-height: clamp(50px, 8vw, 85px);
+    object-fit: contain;
+    margin-bottom: 14px;
+  }
+
+  .foot .footer-logo,
+  .foot .footer-e7-logo {
+    margin-bottom: 0;
+  }
+
+  /* 2. Hero Section Mobile Optimization */
+  .hero-cinematic {
+    background-size: cover;
+    background-position: center 30%;
+  }
+
+  @keyframes riseCrestMobile {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-cinematic .crest {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    margin: -20px auto 16px;
+    transform: translateY(0);
+    animation: riseCrestMobile 1.2s .3s cubic-bezier(.2, .7, .2, 1) forwards;
+  }
+
+  .hero-actions-row {
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .hero-quote-card {
+    width: 100%;
+    max-width: 340px;
+    padding: 10px 14px;
+    box-sizing: border-box;
+  }
+
+  .quote-line-1,
+  .quote-line-2,
+  .quote-line-3 {
+    font-size: clamp(0.75rem, 3.5vw, 0.95rem);
+    line-height: 1.35;
+  }
+
+  .hero-plan-btn {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  /* 3. Chapter by Chapter Timeline: Native Touch-Swipe Carousel */
+  .timeline-scroll-container {
+    height: auto;
+    padding: 56px 0 48px;
+  }
+
+  .timeline-sticky-stage {
+    position: relative;
+    top: auto;
+    height: auto;
+    overflow: visible;
+    padding-top: 0;
+  }
+
+  .timeline-milestones-track {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(60px, 1fr));
+    overflow-x: auto;
+    overflow-y: visible;
+    padding-top: 8px;
+    margin-top: -8px;
+    scrollbar-width: none;
+  }
+
+  .timeline-milestones-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .timeline-progress-line {
+    top: 6.5px;
+  }
+
+  .milestone-node {
+    padding: 14px 4px 8px 0;
+    min-width: 0;
+  }
+
+  .milestone-node .diamond {
+    top: 1px;
+  }
+
+  .milestone-node .milestone-title {
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .timeline-cards-deck {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 16px 0 20px;
+    height: auto;
+    min-height: 0;
+    scrollbar-width: none;
+  }
+
+  .timeline-cards-deck::-webkit-scrollbar {
+    display: none;
+  }
+
+  .timeline-chapter-card,
+  .timeline-chapter-card.active {
+    flex: 0 0 88%;
+    scroll-snap-align: center;
+    position: relative;
+    inset: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    background: rgba(18, 15, 11, 0.85);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    border-radius: 8px;
+    padding: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.25s ease;
+  }
+
+  .timeline-chapter-card.active {
+    border-color: rgba(212, 175, 55, 0.55);
+  }
+
+  .tl-media-wrapper {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: 16 / 10;
+  }
+
+  .tl-content-wrapper {
+    min-height: auto;
+    flex: 1;
+  }
+
+  .tl-scroll-hint {
+    font-size: 0;
+  }
+
+  .tl-scroll-hint::after {
+    content: "Swipe Chapters →";
+    font-size: 10.5px;
+  }
+
+  /* 4. Footer Uncover Fallback & Clean Brand Stacking */
+  #main-content-wrapper {
+    box-shadow: none;
+  }
+
+  #site-footer {
+    position: relative;
+    z-index: auto;
+    min-height: auto;
+    padding: 64px 20px 88px;
+  }
+
+  #site-footer > .wrap {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .footer-brand-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .footer-divider {
+    display: none;
+  }
+
+  /* 5. Mobile Reveal Performance & Snappiness */
+  .reveal {
+    transform: translateY(16px);
+    transition-duration: 0.65s;
+  }
+
+  .rv {
+    transform: translateY(16px);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-cinematic .crest {
+    max-width: 155px;
+    margin: -16px auto 14px;
+  }
+
+  .hero-tagline {
+    font-size: 0.82rem;
+    letter-spacing: 1.8px;
+    gap: 8px;
+  }
+
+  .milestone-node .milestone-title {
+    font-size: 10.5px;
+  }
+
+  .timeline-chapter-card,
+  .timeline-chapter-card.active {
+    flex: 0 0 90%;
+  }
+
+  .darbar-wide-banner,
+  .hall-icons-banner,
+  .icons-wide-banner,
+  .sheesh-landscape-banner {
+    border-radius: 6px;
+  }
+}
+
+

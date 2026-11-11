@@ -15,7 +15,11 @@
   $$('#mmenu a').forEach(a => a.onclick = () => { document.body.classList.remove('menu-open'); burger.setAttribute('aria-expanded', false) });
 
   /* reveal */
-  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } }), { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+  const mobileMediaQuery = window.matchMedia('(max-width: 768px)');
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target) } }), {
+    threshold: mobileMediaQuery.matches ? .08 : .15,
+    rootMargin: mobileMediaQuery.matches ? '0px 0px -20px 0px' : '0px 0px -40px 0px'
+  });
   $$('.rv,.exp').forEach(el => io.observe(el));
   function revealTick() { const lim = innerHeight * .92; $$('.rv:not(.in),.exp:not(.in)').forEach(el => { if (el.getBoundingClientRect().top < lim) el.classList.add('in') }) }
   setTimeout(() => $$('.rv,.exp').forEach(el => el.classList.add('in')), 2500);
@@ -27,8 +31,9 @@
   reel(0);
 
 
-  /* timeline — Scroll-Driven Sticky Storytelling */
+  /* timeline — Scroll-Driven Sticky Storytelling (Desktop) & Horizontal Swipe Carousel (Mobile) */
   const track = document.getElementById('timeline-scroll-track');
+  const cardsDeck = document.querySelector('.timeline-cards-deck');
   const cards = document.querySelectorAll('.timeline-chapter-card');
   const nodes = document.querySelectorAll('.milestone-node');
   const progressFill = document.getElementById('timelineProgressFill');
@@ -38,16 +43,7 @@
     return window.innerWidth <= 860 ? 64 : 80;
   }
 
-  function updateTimelineOnScroll() {
-    if (!track || totalChapters === 0) return;
-    const rect = track.getBoundingClientRect();
-    const stickyTop = getTimelineStickyTop();
-    const trackHeight = track.offsetHeight - window.innerHeight + stickyTop;
-    if (trackHeight <= 0) return;
-
-    const scrollProgress = Math.min(Math.max((stickyTop - rect.top) / trackHeight, 0), 0.9999);
-    const activeIndex = Math.min(Math.floor(scrollProgress * totalChapters), totalChapters - 1);
-
+  function setTimelineActiveState(activeIndex, progressPercent) {
     cards.forEach((card, idx) => {
       card.classList.toggle('active', idx === activeIndex);
     });
@@ -59,14 +55,74 @@
     });
 
     if (progressFill) {
-      progressFill.style.width = (scrollProgress * 100).toFixed(2) + '%';
+      progressFill.style.width = progressPercent.toFixed(2) + '%';
     }
+  }
+
+  function updateMobileTimelineFromScroll() {
+    if (!cardsDeck || totalChapters === 0 || !mobileMediaQuery.matches) return;
+    if (cardsDeck.dataset.programmaticTarget !== undefined) return;
+    const deckRect = cardsDeck.getBoundingClientRect();
+    const deckCenter = deckRect.left + deckRect.width / 2;
+    let closestIdx = 0;
+    let closestDist = Infinity;
+
+    cards.forEach((card, idx) => {
+      const r = card.getBoundingClientRect();
+      const dist = Math.abs(r.left + r.width / 2 - deckCenter);
+      if (dist < closestDist) {
+        closestDist = dist;
+        closestIdx = idx;
+      }
+    });
+
+    const maxScroll = cardsDeck.scrollWidth - cardsDeck.clientWidth;
+    const pct = maxScroll > 0
+      ? Math.min(100, Math.max(12, (cardsDeck.scrollLeft / maxScroll) * 100))
+      : ((closestIdx + 1) / totalChapters) * 100;
+
+    setTimelineActiveState(closestIdx, pct);
+  }
+
+  function updateTimelineOnScroll() {
+    if (!track || totalChapters === 0) return;
+
+    if (mobileMediaQuery.matches) {
+      updateMobileTimelineFromScroll();
+      return;
+    }
+
+    const rect = track.getBoundingClientRect();
+    const stickyTop = getTimelineStickyTop();
+    const trackHeight = track.offsetHeight - window.innerHeight + stickyTop;
+    if (trackHeight <= 0) return;
+
+    const scrollProgress = Math.min(Math.max((stickyTop - rect.top) / trackHeight, 0), 0.9999);
+    const activeIndex = Math.min(Math.floor(scrollProgress * totalChapters), totalChapters - 1);
+
+    setTimelineActiveState(activeIndex, scrollProgress * 100);
   }
 
   // Click milestone nodes to scroll directly to the corresponding chapter
   nodes.forEach((node, idx) => {
     node.addEventListener('click', () => {
       if (!track || totalChapters === 0) return;
+
+      if (mobileMediaQuery.matches && cardsDeck && cards[idx]) {
+        const targetCard = cards[idx];
+        const targetLeft = Math.max(0, targetCard.offsetLeft - (cardsDeck.clientWidth - targetCard.offsetWidth) / 2);
+        cardsDeck.dataset.programmaticTarget = String(idx);
+        cardsDeck.style.scrollSnapType = 'none';
+        cardsDeck.scrollTo({ left: targetLeft, behavior: 'smooth' });
+        setTimelineActiveState(idx, ((idx + 1) / totalChapters) * 100);
+        clearTimeout(cardsDeck._snapTimer);
+        cardsDeck._snapTimer = setTimeout(() => {
+          delete cardsDeck.dataset.programmaticTarget;
+          cardsDeck.style.scrollSnapType = '';
+        }, 650);
+        return;
+      }
+
       const stickyTop = getTimelineStickyTop();
       const trackHeight = track.offsetHeight - window.innerHeight + stickyTop;
       const trackTopDoc = window.scrollY + track.getBoundingClientRect().top;
@@ -81,6 +137,9 @@
     });
   });
 
+  if (cardsDeck) {
+    cardsDeck.addEventListener('scroll', updateMobileTimelineFromScroll, { passive: true });
+  }
   window.addEventListener('scroll', updateTimelineOnScroll, { passive: true });
   window.addEventListener('resize', updateTimelineOnScroll, { passive: true });
   if (window.lenis && typeof window.lenis.on === 'function') {

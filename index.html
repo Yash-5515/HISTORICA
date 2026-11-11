@@ -761,10 +761,12 @@
   <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
   <script>
     // 1. Initialize Lenis Smooth Scroll
+    const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      smoothTouch: false,
     });
 
     window.lenis = lenis;
@@ -787,8 +789,8 @@
           }
         });
       }, {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
+        threshold: isMobileViewport ? 0.08 : 0.15,
+        rootMargin: isMobileViewport ? '0px 0px -20px 0px' : '0px 0px -50px 0px'
       });
 
       reveals.forEach((el) => observer.observe(el));
