@@ -859,7 +859,65 @@ section {
 
 .intro {
   text-align: center;
-  padding: clamp(44px, 6vw, 80px) var(--pad)
+  padding: clamp(16px, 2.5vw, 32px) var(--pad);
+}
+
+.manifesto-statement-container {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.diamond-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #d4af37;
+  font-size: 14px;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+
+.diamond-divider::before,
+.diamond-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  max-width: 140px;
+  background: rgba(212, 175, 55, 0.35);
+}
+
+.manifesto-editorial-text {
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-size: 1.45rem;
+  line-height: 1.85;
+  letter-spacing: 0.8px;
+  color: #ded6cb;
+  font-weight: 400;
+  margin: 0;
+}
+
+.gold-highlight {
+  color: #d4af37;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.white-highlight {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .manifesto-statement-container {
+    padding: 40px 16px;
+  }
+  .manifesto-editorial-text {
+    font-size: 1.15rem;
+    line-height: 1.7;
+  }
 }
 
 .intro .h-display {
