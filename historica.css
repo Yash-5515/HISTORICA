@@ -1125,12 +1125,13 @@ section {
 .darbar-wide-banner {
   width: 100%;
   height: auto;
-  max-height: 190px;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
+  object-position: top center;
   border-radius: 6px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
   display: block;
   margin-top: 16px;
-  border: 1px solid rgba(212, 175, 55, 0.25);
 }
 
 /* reveal */
@@ -3945,6 +3946,10 @@ html.lenis body {
     aspect-ratio: 16 / 9;
     object-fit: cover;
     object-position: center;
+  }
+
+  .darbar-wide-banner {
+    object-position: top center;
   }
 
   .hall-icons-banner,
