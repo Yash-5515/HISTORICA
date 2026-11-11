@@ -3419,11 +3419,27 @@ body {
   filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
 }
 
+.royal-darbar-logo {
+  display: block;
+  height: auto;
+  max-height: 110px;
+  max-width: 420px;
+  width: auto;
+  object-fit: contain;
+  margin: 12px 0 18px 0;
+  align-self: flex-start;
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.5));
+}
+
 @media (max-width: 768px) {
   .sheesh-main-logo,
   .sheesh-logo {
     max-height: 90px;
     max-width: 320px;
+  }
+  .royal-darbar-logo {
+    max-height: 80px;
+    max-width: 290px;
   }
 }
 .footer-brand-row {
