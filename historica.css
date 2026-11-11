@@ -1025,6 +1025,17 @@ section {
   margin-top: 14px;
 }
 
+.hall-icons-banner {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  display: block;
+  margin: 18px 0 16px 0;
+}
+
 .darbar-wide-banner {
   width: 100%;
   height: auto;
@@ -2929,13 +2940,15 @@ body {
 /* Banner Image Hover Interactions */
 .sheesh-landscape-banner,
 .darbar-wide-banner,
-.icons-wide-banner {
+.icons-wide-banner,
+.hall-icons-banner {
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
 }
 
 .sheesh-landscape-banner:hover,
 .darbar-wide-banner:hover,
-.icons-wide-banner:hover {
+.icons-wide-banner:hover,
+.hall-icons-banner:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7), 0 0 18px rgba(212, 175, 55, 0.25);
 }
