@@ -291,20 +291,206 @@
     </section>
 
     <!-- TIMELINE -->
-    <section class="sec" id="timeline" data-screen-label="05 Timeline">
-      <div class="wrap">
-          <div class="sec-head">
-            <div>
-              <p class="eyebrow rv reveal">Interactive Timeline</p>
-              <h2 class="h-display rv d1 reveal delay-1">The journey,<br>chapter by chapter</h2>
+    <section id="timeline-scroll-track" class="timeline-scroll-container" data-screen-label="05 Timeline">
+      <span id="timeline" class="timeline-anchor-target" aria-hidden="true"></span>
+      <div class="timeline-sticky-stage">
+        <div class="wrap">
+          <!-- Section Header & Progress Timeline (Pinned at top) -->
+          <div class="timeline-header-wrap">
+            <div class="sec-head">
+              <div>
+                <p class="eyebrow rv reveal">Interactive Timeline</p>
+                <h2 class="h-display rv d1 reveal delay-1">The journey,<br>chapter by chapter</h2>
+              </div>
+              <p class="lede rv d2 reveal delay-2">Scroll to explore 300 years of royal heritage, cinematic history,
+                and national glory atop the Aravallis.</p>
             </div>
-            <p class="lede rv d2 reveal delay-2">Tap through the milestones to explore 300 years of royal heritage, cinematic history,
-              and national glory atop the Aravallis.</p>
+
+            <div class="timeline-milestones-track" id="tlTrack" role="tablist" aria-label="Timeline Chapters">
+              <div class="timeline-progress-line">
+                <span class="timeline-progress-fill" id="timelineProgressFill"></span>
+              </div>
+              <button type="button" class="milestone-node active" data-index="0" role="tab" aria-selected="true"
+                aria-label="Chapter 01: Fort - Nahargarh">
+                <span class="diamond" aria-hidden="true"></span>
+                <span class="milestone-title yr">Fort</span>
+                <span class="milestone-sub lb">Nahargarh</span>
+              </button>
+              <button type="button" class="milestone-node" data-index="1" role="tab" aria-selected="false"
+                aria-label="Chapter 02: Legend - Hadi Rani">
+                <span class="diamond" aria-hidden="true"></span>
+                <span class="milestone-title yr">Legend</span>
+                <span class="milestone-sub lb">Hadi Rani</span>
+              </button>
+              <button type="button" class="milestone-node" data-index="2" role="tab" aria-selected="false"
+                aria-label="Chapter 03: Museum - Jaipur Wax Museum">
+                <span class="diamond" aria-hidden="true"></span>
+                <span class="milestone-title yr">Museum</span>
+                <span class="milestone-sub lb">Jaipur Wax Museum</span>
+              </button>
+              <button type="button" class="milestone-node" data-index="3" role="tab" aria-selected="false"
+                aria-label="Chapter 04: Rebirth - HISTORICA">
+                <span class="diamond" aria-hidden="true"></span>
+                <span class="milestone-title yr">Rebirth</span>
+                <span class="milestone-sub lb">HISTORICA</span>
+              </button>
+              <button type="button" class="milestone-node" data-index="4" role="tab" aria-selected="false"
+                aria-label="Chapter 05: Today - Now Showing">
+                <span class="diamond" aria-hidden="true"></span>
+                <span class="milestone-title yr">Today</span>
+                <span class="milestone-sub lb">Now Showing</span>
+              </button>
+            </div>
           </div>
-          <div class="tl-track rv reveal" id="tlTrack" role="tablist"><span class="tl-fill" id="tlFill"></span></div>
-          <div class="tl-panel" id="tlPanel" aria-live="polite"></div>
+
+          <!-- Chapters Deck (Stacked / Cross-fading Cards) -->
+          <div class="timeline-cards-deck" aria-live="polite">
+            <article class="timeline-chapter-card active" data-index="0">
+              <div class="tl-media-wrapper">
+                <div class="tl-img-frame">
+                  <img src="assets/fort-day.jpg" alt="Nahargarh Fort" class="tl-slide-img" loading="lazy">
+                </div>
+              </div>
+              <div class="tl-content-wrapper">
+                <div class="tl-content-top">
+                  <div class="tl-header-row">
+                    <div class="tl-header-left">
+                      <p class="eyebrow">Nahargarh</p>
+                      <h3 class="h-display">Nahargarh Fort</h3>
+                    </div>
+                    <div class="tl-big-num">01</div>
+                  </div>
+                  <p class="tl-desc">Standing sentinel on the Aravalli ridge high above Jaipur since 1734, Nahargarh
+                    Fort forms the historic crown of the Pink City &mdash; and the majestic setting for HISTORICA today.</p>
+                  <div class="tl-tag-row">
+                    <span class="timeline-tag">FOUNDED 1734</span>
+                  </div>
+                </div>
+                <div class="tl-chapter-meta">
+                  <span class="tl-counter"><b>01</b> / 05</span>
+                  <span class="tl-scroll-hint">Scroll to continue &darr;</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="timeline-chapter-card" data-index="1">
+              <div class="tl-media-wrapper">
+                <div class="tl-img-frame">
+                  <img src="assets/film-hadi.jpg" alt="Hadi Rani — The Ultimate Sacrifice" class="tl-slide-img"
+                    loading="lazy">
+                </div>
+              </div>
+              <div class="tl-content-wrapper">
+                <div class="tl-content-top">
+                  <div class="tl-header-row">
+                    <div class="tl-header-left">
+                      <p class="eyebrow">Hadi Rani</p>
+                      <h3 class="h-display">Hadi Rani &mdash; The Ultimate Sacrifice</h3>
+                    </div>
+                    <div class="tl-big-num">02</div>
+                  </div>
+                  <p class="tl-desc">One queen. One vow. One immortal sacrifice &mdash; the legend of Hadi Rani brought to
+                    life in vivid sensory cinema at Ram Prakash Talkies, honoring Rajasthan&rsquo;s bravest warrior
+                    soul.</p>
+                  <div class="tl-tag-row">
+                    <span class="timeline-tag">LEGEND OF 1679</span>
+                  </div>
+                </div>
+                <div class="tl-chapter-meta">
+                  <span class="tl-counter"><b>02</b> / 05</span>
+                  <span class="tl-scroll-hint">Scroll to continue &darr;</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="timeline-chapter-card" data-index="2">
+              <div class="tl-media-wrapper">
+                <div class="tl-img-frame">
+                  <img src="assets/cricket.jpg" alt="The Jaipur Wax Museum" class="tl-slide-img" loading="lazy">
+                </div>
+              </div>
+              <div class="tl-content-wrapper">
+                <div class="tl-content-top">
+                  <div class="tl-header-row">
+                    <div class="tl-header-left">
+                      <p class="eyebrow">Jaipur Wax Museum</p>
+                      <h3 class="h-display">The Jaipur Wax Museum</h3>
+                    </div>
+                    <div class="tl-big-num">03</div>
+                  </div>
+                  <p class="tl-desc">Established within the royal fort walls, the Jaipur Wax Museum opened its doors to
+                    celebrate the icons of India, cricket legends, and global luminaries.</p>
+                  <div class="tl-tag-row">
+                    <span class="timeline-tag">EST. 2016</span>
+                  </div>
+                </div>
+                <div class="tl-chapter-meta">
+                  <span class="tl-counter"><b>03</b> / 05</span>
+                  <span class="tl-scroll-hint">Scroll to continue &darr;</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="timeline-chapter-card" data-index="3">
+              <div class="tl-media-wrapper">
+                <div class="tl-img-frame">
+                  <img src="assets/doorway.jpg" alt="HISTORICA is Born" class="tl-slide-img" loading="lazy">
+                </div>
+              </div>
+              <div class="tl-content-wrapper">
+                <div class="tl-content-top">
+                  <div class="tl-header-row">
+                    <div class="tl-header-left">
+                      <p class="eyebrow">HISTORICA</p>
+                      <h3 class="h-display">HISTORICA is Born</h3>
+                    </div>
+                    <div class="tl-big-num">04</div>
+                  </div>
+                  <p class="tl-desc">Conceived by Mr. Anoop Srivastava, Founder &amp; Director of Entertainment 7
+                    Creative Ventures, the museum expanded 10X into a multi-experiential universe featuring Thikri mirror
+                    inlay, 4D effects, and 42+ statues.</p>
+                  <div class="tl-tag-row">
+                    <span class="timeline-tag">REBIRTH &amp; EXPANSION</span>
+                  </div>
+                </div>
+                <div class="tl-chapter-meta">
+                  <span class="tl-counter"><b>04</b> / 05</span>
+                  <span class="tl-scroll-hint">Scroll to continue &darr;</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="timeline-chapter-card" data-index="4">
+              <div class="tl-media-wrapper">
+                <div class="tl-img-frame">
+                  <img src="assets/sheesh-mahal.jpg" alt="Step Into History" class="tl-slide-img" loading="lazy">
+                </div>
+              </div>
+              <div class="tl-content-wrapper">
+                <div class="tl-content-top">
+                  <div class="tl-header-row">
+                    <div class="tl-header-left">
+                      <p class="eyebrow">Now Showing</p>
+                      <h3 class="h-display">Step Into History</h3>
+                    </div>
+                    <div class="tl-big-num">05</div>
+                  </div>
+                  <p class="tl-desc">Ram Prakash Talkies, Sheesh Mahal, the Royal Darbar, and the Hall of Icons &mdash;
+                    four landmark experiences open daily to visitors atop Nahargarh Fort.</p>
+                  <div class="tl-tag-row">
+                    <span class="timeline-tag">OPEN DAILY</span>
+                  </div>
+                </div>
+                <div class="tl-chapter-meta">
+                  <span class="tl-counter"><b>05</b> / 05</span>
+                  <span class="tl-scroll-hint">Continue exploring below &darr;</span>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       <!-- VISIT -->
       <section class="sec" id="visit" data-screen-label="07 Plan Your Visit">

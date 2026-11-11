@@ -27,261 +27,66 @@
   reel(0);
 
 
-  /* timeline — Cinematic Automatic Storytelling, Progress Bar & Instant Scrubbing */
-  const TL = [
-    {
-      yr: 'Fort',
-      lb: 'Nahargarh',
-      t: 'Nahargarh Fort',
-      img: 'assets/fort-day.jpg',
-      d: 'Standing sentinel on the Aravalli ridge high above Jaipur since 1734, Nahargarh Fort forms the historic crown of the Pink City — and the majestic setting for HISTORICA today.',
-      badge: 'FOUNDED 1734'
-    },
-    {
-      yr: 'Legend',
-      lb: 'Hadi Rani',
-      t: 'Hadi Rani — The Ultimate Sacrifice',
-      img: 'assets/film-hadi.jpg',
-      d: 'One queen. One vow. One immortal sacrifice — the legend of Hadi Rani brought to life in vivid sensory cinema at Ram Prakash Talkies, honoring Rajasthan’s bravest warrior soul.',
-      badge: 'LEGEND OF 1679'
-    },
-    {
-      yr: 'Museum',
-      lb: 'Jaipur Wax Museum',
-      t: 'The Jaipur Wax Museum',
-      img: 'assets/cricket.jpg',
-      d: 'Established within the royal fort walls, the Jaipur Wax Museum opened its doors to celebrate the icons of India, cricket legends, and global luminaries.',
-      badge: 'EST. 2016'
-    },
-    {
-      yr: 'Rebirth',
-      lb: 'HISTORICA',
-      t: 'HISTORICA is Born',
-      img: 'assets/doorway.jpg',
-      d: 'Conceived by Mr. Anoop Srivastava, Founder & Director of Entertainment 7 Creative Ventures, the museum expanded 10X into a multi-experiential universe featuring Thikri mirror inlay, 4D effects, and 42+ statues.',
-      badge: 'REBIRTH & EXPANSION'
-    },
-    {
-      yr: 'Today',
-      lb: 'Now Showing',
-      t: 'Step Into History',
-      img: 'assets/sheesh-mahal.jpg',
-      d: 'Ram Prakash Talkies, Sheesh Mahal, the Royal Darbar, and the Hall of Icons — four landmark experiences open daily to visitors atop Nahargarh Fort.',
-      badge: 'OPEN DAILY'
-    }
-  ];
+  /* timeline — Scroll-Driven Sticky Storytelling */
+  const track = document.getElementById('timeline-scroll-track');
+  const cards = document.querySelectorAll('.timeline-chapter-card');
+  const nodes = document.querySelectorAll('.milestone-node');
+  const progressFill = document.getElementById('timelineProgressFill');
+  const totalChapters = cards.length;
 
-  const track = $('#tlTrack'), panel = $('#tlPanel');
-  const DURATION = 5500; // 5.5s autoplay per chapter
-  let tlI = 0;
-  let isTransitioning = false;
-  let isPaused = false;
-  let startTime = null;
-  let elapsedBeforePause = 0;
-  let rafProgressId = null;
-
-  // Build milestone track buttons with dedicated progress fill
-  track.innerHTML = '<span class="tl-fill" id="tlFill"></span>';
-  TL.forEach((e, i) => {
-    const b = document.createElement('button');
-    b.setAttribute('role', 'tab');
-    b.setAttribute('aria-label', `${e.yr} milestone: ${e.lb}`);
-    b.innerHTML = `<span class="yr">${e.yr}</span><span class="lb">${e.lb}</span>`;
-    b.onclick = () => jumpToChapter(i);
-    track.appendChild(b);
-  });
-
-  // Fixed-dimension containers to prevent CLS
-  panel.innerHTML = `
-    <div class="tl-media-wrapper">
-      <div class="tl-img-frame">
-        <img src="" alt="" class="tl-slide-img" id="tlSlideImg">
-      </div>
-    </div>
-    <div class="tl-content-wrapper" id="tlContentWrap">
-      <div class="tl-content-top">
-        <div class="tl-header-row">
-          <div class="tl-header-left">
-            <p class="eyebrow" id="tlEyebrow" style="margin-top:0"></p>
-            <h3 class="h-display" id="tlTitle" style="margin:8px 0 14px"></h3>
-          </div>
-          <div class="tl-big-num" id="tlBigNum">01</div>
-        </div>
-        <p class="tl-desc" id="tlDesc"></p>
-        <div class="tl-tag-row" id="tlTagRow"></div>
-      </div>
-      <div class="tl-nav">
-        <button class="tl-nav-btn prev" aria-label="Previous Chapter" data-d="-1">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        </button>
-        <button class="tl-nav-btn next" aria-label="Next Chapter" data-d="1">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </button>
-        <span class="tl-counter"><b id="tlStepNum">01</b> / 05</span>
-      </div>
-    </div>
-  `;
-
-  panel.querySelector('.tl-nav-btn.prev').onclick = () => jumpToChapter((tlI - 1 + TL.length) % TL.length);
-  panel.querySelector('.tl-nav-btn.next').onclick = () => jumpToChapter((tlI + 1) % TL.length);
-
-  const slideImg = $('#tlSlideImg', panel);
-  const contentWrap = $('#tlContentWrap', panel);
-  const mediaWrap = $('.tl-media-wrapper', panel);
-  const eyebrowEl = $('#tlEyebrow', panel);
-  const titleEl = $('#tlTitle', panel);
-  const descEl = $('#tlDesc', panel);
-  const bigNumEl = $('#tlBigNum', panel);
-  const tagRowEl = $('#tlTagRow', panel);
-  const stepNumEl = $('#tlStepNum', panel);
-
-  function applyChapterContent(index) {
-    const e = TL[index];
-    slideImg.src = e.img;
-    slideImg.alt = e.t;
-    eyebrowEl.textContent = e.lb;
-    titleEl.textContent = e.t;
-    descEl.textContent = e.d;
-    bigNumEl.textContent = String(index + 1).padStart(2, '0');
-    stepNumEl.textContent = String(index + 1).padStart(2, '0');
-    tagRowEl.innerHTML = e.badge ? `<span class="timeline-tag">${e.badge}</span>` : '';
-
-    slideImg.classList.remove('ken-burns');
-    void slideImg.offsetWidth;
-    slideImg.classList.add('ken-burns');
+  function getTimelineStickyTop() {
+    return window.innerWidth <= 860 ? 64 : 80;
   }
 
-  function tl(i) {
-    tlI = (i + TL.length) % TL.length;
+  function updateTimelineOnScroll() {
+    if (!track || totalChapters === 0) return;
+    const rect = track.getBoundingClientRect();
+    const stickyTop = getTimelineStickyTop();
+    const trackHeight = track.offsetHeight - window.innerHeight + stickyTop;
+    if (trackHeight <= 0) return;
 
-    // Highlight milestone nodes
-    $$('button[role="tab"]', track).forEach((b, k) => {
-      b.classList.toggle('on', k === tlI);
-      b.setAttribute('aria-selected', k === tlI);
+    const scrollProgress = Math.min(Math.max((stickyTop - rect.top) / trackHeight, 0), 0.9999);
+    const activeIndex = Math.min(Math.floor(scrollProgress * totalChapters), totalChapters - 1);
+
+    cards.forEach((card, idx) => {
+      card.classList.toggle('active', idx === activeIndex);
     });
 
-    if (contentWrap && mediaWrap) {
-      isTransitioning = true;
-      contentWrap.classList.add('tl-slide-out');
-      mediaWrap.classList.add('tl-slide-out');
+    nodes.forEach((node, idx) => {
+      const isActive = idx === activeIndex;
+      node.classList.toggle('active', isActive);
+      node.setAttribute('aria-selected', String(isActive));
+    });
 
-      setTimeout(() => {
-        applyChapterContent(tlI);
-        contentWrap.classList.remove('tl-slide-out');
-        mediaWrap.classList.remove('tl-slide-out');
-        contentWrap.classList.add('tl-slide-in');
-        mediaWrap.classList.add('tl-slide-in');
-
-        setTimeout(() => {
-          contentWrap.classList.remove('tl-slide-in');
-          mediaWrap.classList.remove('tl-slide-in');
-          isTransitioning = false;
-        }, 450);
-      }, 220);
-    } else {
-      applyChapterContent(tlI);
+    if (progressFill) {
+      progressFill.style.width = (scrollProgress * 100).toFixed(2) + '%';
     }
   }
 
-  function jumpToChapter(i) {
-    tl(i);
-    resetProgress();
-  }
+  // Click milestone nodes to scroll directly to the corresponding chapter
+  nodes.forEach((node, idx) => {
+    node.addEventListener('click', () => {
+      if (!track || totalChapters === 0) return;
+      const stickyTop = getTimelineStickyTop();
+      const trackHeight = track.offsetHeight - window.innerHeight + stickyTop;
+      const trackTopDoc = window.scrollY + track.getBoundingClientRect().top;
+      const targetProgress = (idx + 0.08) / totalChapters;
+      const targetY = trackTopDoc - stickyTop + targetProgress * trackHeight;
 
-  function resetProgress() {
-    startTime = null;
-    elapsedBeforePause = 0;
-    const basePct = tlI * 20;
-    const progressFill = $('#tlFill', track);
-    if (progressFill) progressFill.style.width = basePct + '%';
-  }
-
-  function progressLoop(timestamp) {
-    if (!startTime) startTime = timestamp;
-
-    if (!isPaused && !isTransitioning) {
-      const elapsed = timestamp - startTime + elapsedBeforePause;
-      const fraction = Math.min(1, elapsed / DURATION);
-      const startPct = tlI * 20;
-      const currentPct = startPct + fraction * 20;
-      const progressFill = $('#tlFill', track);
-      if (progressFill) progressFill.style.width = currentPct + '%';
-
-      if (fraction >= 1) {
-        startTime = null;
-        elapsedBeforePause = 0;
-        tl((tlI + 1) % TL.length);
+      if (window.lenis && typeof window.lenis.scrollTo === 'function') {
+        window.lenis.scrollTo(targetY, { duration: 1.0 });
+      } else {
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
       }
-    } else if (isPaused) {
-      startTime = timestamp;
-    }
-
-    rafProgressId = requestAnimationFrame(progressLoop);
-  }
-
-  // Initial state setup
-  applyChapterContent(0);
-  $$('button[role="tab"]', track)[0]?.classList.add('on');
-  resetProgress();
-  rafProgressId = requestAnimationFrame(progressLoop);
-
-  // Pause on hover / touch, resume on leave
-  function pauseAutoplay() {
-    if (!isPaused) {
-      isPaused = true;
-      if (startTime) {
-        elapsedBeforePause += performance.now() - startTime;
-      }
-      startTime = null;
-    }
-  }
-
-  function resumeAutoplay() {
-    if (isPaused) {
-      isPaused = false;
-      startTime = performance.now();
-    }
-  }
-
-  const timelineSection = $('#timeline');
-  if (timelineSection) {
-    timelineSection.addEventListener('mouseenter', pauseAutoplay);
-    timelineSection.addEventListener('mouseleave', resumeAutoplay);
-    timelineSection.addEventListener('touchstart', pauseAutoplay, { passive: true });
-    timelineSection.addEventListener('touchend', resumeAutoplay, { passive: true });
-  }
-
-  // Keyboard navigation when timeline is in view
-  window.addEventListener('keydown', (e) => {
-    if (!timelineSection) return;
-    const rect = timelineSection.getBoundingClientRect();
-    const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-    if (isInView) {
-      if (e.key === 'ArrowRight') {
-        jumpToChapter((tlI + 1) % TL.length);
-      } else if (e.key === 'ArrowLeft') {
-        jumpToChapter((tlI - 1 + TL.length) % TL.length);
-      }
-    }
+    });
   });
 
-  // Mobile swipe gestures
-  let touchStartX = 0;
-  let touchEndX = 0;
-  if (panel) {
-    panel.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    panel.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchEndX < touchStartX - 50) {
-        jumpToChapter((tlI + 1) % TL.length);
-      } else if (touchEndX > touchStartX + 50) {
-        jumpToChapter((tlI - 1 + TL.length) % TL.length);
-      }
-    }, { passive: true });
+  window.addEventListener('scroll', updateTimelineOnScroll, { passive: true });
+  window.addEventListener('resize', updateTimelineOnScroll, { passive: true });
+  if (window.lenis && typeof window.lenis.on === 'function') {
+    window.lenis.on('scroll', updateTimelineOnScroll);
   }
+  updateTimelineOnScroll();
 
   /* map */
   const ZONES = [
