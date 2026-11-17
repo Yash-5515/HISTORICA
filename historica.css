@@ -1134,6 +1134,36 @@ section {
   margin-top: 16px;
 }
 
+/* Section I: Ramprakash Talkies Featured Media */
+.ramprakash-media-wrap {
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  align-self: center;
+  background: transparent;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+}
+
+.ramprakash-media-wrap:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7), 0 0 18px rgba(212, 175, 55, 0.25);
+}
+
+.ramprakash-feature-img {
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  display: block;
+  object-fit: contain;
+  border-radius: 5px;
+  transform: none !important;
+}
+
 /* reveal */
 .rv {
   opacity: 0;
@@ -3956,6 +3986,21 @@ html.lenis body {
   .icons-wide-banner,
   .sheesh-landscape-banner {
     aspect-ratio: 21 / 9;
+  }
+
+  .ramprakash-media-wrap {
+    width: 100%;
+    height: auto !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+  }
+
+  .ramprakash-feature-img {
+    width: 100%;
+    height: auto !important;
+    max-height: none !important;
+    display: block;
+    object-fit: contain;
   }
 
   .royal-darbar-logo,
