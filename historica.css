@@ -1414,6 +1414,29 @@ section {
   transform: scale(1.04);
 }
 
+/* Chapter 01 (Nahargarh Fort) Custom Framing */
+.timeline-chapter-card[data-index="0"] .timeline-img-wrap {
+  width: 44%; /* Matches the compact left column width */
+  min-width: min(100%, 420px);
+  max-width: 460px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  background: #080808;
+}
+
+.chapter-01-img {
+  width: 100%;
+  height: auto;
+  max-height: 290px; /* Keeps it compact and aligned with the text column */
+  object-fit: contain; /* Ensures 100% of the image is visible with zero cropping */
+  display: block;
+}
+
 .tl-content-wrapper {
   min-height: clamp(240px, 42vh, 390px);
   display: flex;
@@ -4012,6 +4035,14 @@ html.lenis body {
     height: 100%;
     object-fit: cover;
     object-position: top center;
+  }
+
+  .timeline-chapter-card[data-index="0"] .timeline-img-wrap {
+    width: 100%;
+    max-width: 100%;
+  }
+  .chapter-01-img {
+    max-height: 220px;
   }
 
   .royal-darbar-logo,
