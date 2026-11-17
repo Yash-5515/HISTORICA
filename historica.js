@@ -253,7 +253,7 @@
     if (!vmodal) return;
     vmodal.classList.remove('open');
     vmodal.setAttribute('aria-hidden', 'true');
-    if (!bk.classList.contains('open')) {
+    if (bk && !bk.classList.contains('open')) {
       document.body.style.overflow = '';
     }
   }
@@ -274,6 +274,125 @@
     if (e.key === 'Escape' && vmodal && vmodal.classList.contains('open')) {
       closeVModal();
     }
+  });
+
+  /* celebrity gallery & spotlight modal */
+  const celebCards = $$('.celebrity-card');
+  const celebFilterBtns = $$('.celeb-filter-btn');
+  const celebModal = $('#celebModal');
+  let currentCelebIdx = 0;
+  let activeCelebList = [...celebCards];
+
+  function filterCelebrities(category) {
+    celebFilterBtns.forEach(btn => {
+      const isActive = btn.dataset.filter === category;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+    });
+
+    activeCelebList = [];
+    celebCards.forEach(card => {
+      const match = category === 'all' || card.dataset.category === category;
+      if (match) {
+        card.classList.remove('filtered-out');
+        card.style.display = '';
+        activeCelebList.push(card);
+      } else {
+        card.classList.add('filtered-out');
+        setTimeout(() => {
+          if (card.classList.contains('filtered-out')) {
+            card.style.display = 'none';
+          }
+        }, 280);
+      }
+    });
+  }
+
+  celebFilterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterCelebrities(btn.dataset.filter);
+    });
+  });
+
+  function populateCelebModal(card) {
+    if (!card || !celebModal) return;
+    const img = $('#celebModalImg', celebModal);
+    const badge = $('#celebModalBadge', celebModal);
+    const name = $('#celebModalName', celebModal);
+    const title = $('#celebModalTitle', celebModal);
+    const desc = $('#celebModalDesc', celebModal);
+    const highlight = $('#celebModalHighlight', celebModal);
+    const counter = $('#celebCounter', celebModal);
+
+    if (img) {
+      img.src = card.dataset.image;
+      img.alt = card.dataset.name || 'Celebrity Icon';
+    }
+    if (badge) badge.textContent = card.dataset.categoryLabel || 'ICON';
+    if (name) name.textContent = card.dataset.name || '';
+    if (title) title.textContent = card.dataset.title || '';
+    if (desc) desc.textContent = card.dataset.desc || '';
+    if (highlight) highlight.textContent = card.dataset.highlight || '';
+
+    const currentPos = activeCelebList.indexOf(card);
+    if (counter) {
+      counter.textContent = `${currentPos >= 0 ? currentPos + 1 : 1} / ${activeCelebList.length}`;
+    }
+    currentCelebIdx = currentPos >= 0 ? currentPos : 0;
+  }
+
+  function openCelebModal(card) {
+    if (!celebModal) return;
+    populateCelebModal(card);
+    celebModal.classList.add('open');
+    celebModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const closeBtn = $('.celeb-modal-close', celebModal);
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeCelebModal() {
+    if (!celebModal) return;
+    celebModal.classList.remove('open');
+    celebModal.setAttribute('aria-hidden', 'true');
+    if ((!bk || !bk.classList.contains('open')) && (!vmodal || !vmodal.classList.contains('open'))) {
+      document.body.style.overflow = '';
+    }
+  }
+
+  function stepCelebModal(dir) {
+    if (!activeCelebList.length) return;
+    currentCelebIdx = (currentCelebIdx + dir + activeCelebList.length) % activeCelebList.length;
+    populateCelebModal(activeCelebList[currentCelebIdx]);
+  }
+
+  celebCards.forEach(card => {
+    card.addEventListener('click', () => openCelebModal(card));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openCelebModal(card);
+      }
+    });
+  });
+
+  const prevBtn = $('#celebPrevBtn');
+  const nextBtn = $('#celebNextBtn');
+  if (prevBtn) prevBtn.addEventListener('click', () => stepCelebModal(-1));
+  if (nextBtn) nextBtn.addEventListener('click', () => stepCelebModal(1));
+
+  document.addEventListener('click', e => {
+    if (e.target.closest('[data-celeb-close]')) {
+      e.preventDefault();
+      closeCelebModal();
+    }
+  });
+
+  addEventListener('keydown', e => {
+    if (!celebModal || !celebModal.classList.contains('open')) return;
+    if (e.key === 'Escape') closeCelebModal();
+    if (e.key === 'ArrowLeft') stepCelebModal(-1);
+    if (e.key === 'ArrowRight') stepCelebModal(1);
   });
 
   onScroll();
